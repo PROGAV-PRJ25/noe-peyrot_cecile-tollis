@@ -1,5 +1,3 @@
-using System.Diagnostics.Contracts;
-
 public abstract class Terrains
 {
     public int Id {get; private set;}
@@ -7,6 +5,7 @@ public abstract class Terrains
     public double Qualite {get;set;}
     public double Luminosite {get; set;}
     List <Plantes> Plante {get; set;}
+    
 
     public Terrains(int id, TypeTerrain type, double qualite, double luminosite, List <Plantes> plante)
     {
@@ -14,6 +13,6 @@ public abstract class Terrains
         Type = type;
         Qualite = qualite;
         Luminosite = luminosite;
-        
+        Plante = plante;
     }
 }
