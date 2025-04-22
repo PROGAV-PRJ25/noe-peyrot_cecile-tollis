@@ -88,7 +88,7 @@ public abstract class Plantes
         */
     }
 
-    public abstract void AfficherPlante();
-    public abstract void SupprimerPlante();
+    public abstract void PlanterPlante();
+    public abstract void RecolterPlante();
 
 }
