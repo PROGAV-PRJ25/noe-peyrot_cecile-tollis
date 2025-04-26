@@ -1,0 +1,14 @@
+C:\Users\peyro\OneDrive\Bureau\ENSemenCe\bin\Debug\net8.0\ENSemenCe.exe
+C:\Users\peyro\OneDrive\Bureau\ENSemenCe\bin\Debug\net8.0\ENSemenCe.deps.json
+C:\Users\peyro\OneDrive\Bureau\ENSemenCe\bin\Debug\net8.0\ENSemenCe.runtimeconfig.json
+C:\Users\peyro\OneDrive\Bureau\ENSemenCe\bin\Debug\net8.0\ENSemenCe.dll
+C:\Users\peyro\OneDrive\Bureau\ENSemenCe\bin\Debug\net8.0\ENSemenCe.pdb
+C:\Users\peyro\OneDrive\Bureau\ENSemenCe\obj\Debug\net8.0\ENSemenCe.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\peyro\OneDrive\Bureau\ENSemenCe\obj\Debug\net8.0\ENSemenCe.AssemblyInfoInputs.cache
+C:\Users\peyro\OneDrive\Bureau\ENSemenCe\obj\Debug\net8.0\ENSemenCe.AssemblyInfo.cs
+C:\Users\peyro\OneDrive\Bureau\ENSemenCe\obj\Debug\net8.0\ENSemenCe.csproj.CoreCompileInputs.cache
+C:\Users\peyro\OneDrive\Bureau\ENSemenCe\obj\Debug\net8.0\ENSemenCe.dll
+C:\Users\peyro\OneDrive\Bureau\ENSemenCe\obj\Debug\net8.0\refint\ENSemenCe.dll
+C:\Users\peyro\OneDrive\Bureau\ENSemenCe\obj\Debug\net8.0\ENSemenCe.pdb
+C:\Users\peyro\OneDrive\Bureau\ENSemenCe\obj\Debug\net8.0\ENSemenCe.genruntimeconfig.cache
+C:\Users\peyro\OneDrive\Bureau\ENSemenCe\obj\Debug\net8.0\ref\ENSemenCe.dll
