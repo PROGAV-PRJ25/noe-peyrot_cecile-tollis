@@ -8,7 +8,7 @@ public class Joueur
     public Joueur(string nom)
     {
         Nom = nom;
-        NbActionsPossibles = 3; // Nombre maximum d'actions par tour : On avait dit 3 ou 4 déjà ? 
+        NbActionsPossibles = 4;
         InventaireSemis = new List<Plante>();
         InventaireRecoltes = new List<string>();
     }
