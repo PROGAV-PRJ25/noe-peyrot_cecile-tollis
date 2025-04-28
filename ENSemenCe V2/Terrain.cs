@@ -1,4 +1,4 @@
-public class Terrain
+public abstract class Terrain
 {
     public string TypeTerrain {get;set;}
     public Plante?[,] Cases {get;set;}
