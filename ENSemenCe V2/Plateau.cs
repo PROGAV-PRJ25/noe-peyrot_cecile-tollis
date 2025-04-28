@@ -7,9 +7,9 @@ public class Plateau
         Terrains = new Terrain[3];
         int lignesParZone = nbLignes / 3;
 
-        Terrains[0] = new Terrain("Terre", lignesParZone, nbColonnes);
-        Terrains[1] = new Terrain("Sable", lignesParZone, nbColonnes);
-        Terrains[2] = new Terrain("Argile", lignesParZone, nbColonnes);
+        Terrains[0] = new TerrainTerre("Terre", lignesParZone, nbColonnes);
+        Terrains[1] = new TerrainSable("Sable", lignesParZone, nbColonnes);
+        Terrains[2] = new TerrainArgile("Argile", lignesParZone, nbColonnes);
     }
 
     public void AfficherPlateau()
