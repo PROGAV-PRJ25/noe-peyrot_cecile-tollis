@@ -1,5 +1,6 @@
 public abstract class Plante
 {
+    public string Symbole {get; set;}
     public string Nom {get;set;}
     public int NiveauCroissance {get;set;}
     public int NiveauEau {get;set;}
@@ -8,8 +9,9 @@ public abstract class Plante
     public bool EstMure {get;set;}
     public bool EstMalade {get;set;}
 
-    public Plante(string nom)
+    public Plante(string nom, string symbole)
     {
+        Symbole = symbole;
         Nom = nom;
         NiveauCroissance = 0;
         NiveauEau = 100; // La plante n'a pas besoin d'eau au tout début.
