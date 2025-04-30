@@ -22,7 +22,7 @@ public abstract class Terrain
                     
                 else
                 {
-                    Console.Write(" P "); // Case occupée par une plante (P).
+                    Console.Write($" {Cases[i,j]!.Symbole} "); // Case occupée par une plante (symbole de la plante) - ! évite la valeur nulle
                 }       
             }
 
