@@ -1,7 +1,7 @@
 Plateau plateau = new Plateau(9,6);
 
 // Création d'une Tomate
-Tomate tomate = new Tomate("T");
+Tomate tomate = new Tomate("Tomate","T");
 
 // Création d'un joueur 
 Joueur joueur = new Joueur("Jean"); // A modifier en demandant le nom au début 
