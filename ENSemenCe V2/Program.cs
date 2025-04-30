@@ -8,4 +8,5 @@ Joueur joueur = new Joueur("Jean"); // A modifier en demandant le nom au début
 
 // Ajout de la Tomate dans l'inventaire de semis du joueur
 joueur.InventaireSemis.Add(tomate);
+joueur.Semer(plateau, "Terre", tomate);
 plateau.AfficherPlateau();
