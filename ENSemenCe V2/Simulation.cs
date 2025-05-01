@@ -54,7 +54,7 @@ public class Simulation
                 Console.WriteLine($"{joueur1!.Nom}, il te reste {joueur1.NbActionsPossibles} actions maximum !"); // Rappel nombre actions 
                 Console.WriteLine("Choisis l'action que tu souhaites effectuer");
                 Console.WriteLine("1. Semer ");
-                Console.WriteLine("0. Passer à la semaine suivant");
+                Console.WriteLine("0. Passer à la semaine suivante");
                 choix = Convert.ToInt32(Console.ReadLine()!);
 
                 if(choix !=0)
@@ -73,20 +73,18 @@ public class Simulation
 
                         var planteChoisie = joueur1.InventaireSemis[numPlante - 1];
                         
-                        Console.WriteLine("Sur quel terrain voulez-vous semer la plante : terre, sable, argile (Ecrivez le nom)");
-                        string choixTerrain = Convert.ToString(Console.ReadLine()!.ToLower());
-                        joueur1!.Semer(plateau, choixTerrain, planteChoisie);
+                        joueur1!.Semer(plateau, planteChoisie);
                         plateau.AfficherPlateau();
                     }
                 }
             }
 
         }   
-        joueur1!.Semer(plateau, "Terre", rose1); // Avec ! : joueur1 est garanti d'être initialisé
+        joueur1!.Semer(plateau, rose1); // Avec ! : joueur1 est garanti d'être initialisé
         plateau.AfficherPlateau();
         Thread.Sleep(1500);
         Console.Clear();
-        joueur1.Semer(plateau, "Sable", rose2);
+        joueur1.Semer(plateau, rose2);
         
         plateau.AfficherPlateau();
         
@@ -115,7 +113,7 @@ public class Simulation
         Thread.Sleep(500);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.WriteLine("--- Bienvenue dans ensemence ");
+        Console.WriteLine("--- Bienvenue dans ENSemenCe ");
         Thread.Sleep(1500);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
