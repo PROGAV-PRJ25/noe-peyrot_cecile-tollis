@@ -1,10 +1,25 @@
 public class Simulation
 {
     public int nbTours;
+    public int semaineActuelle;
+
+    private Joueur? joueur1;
+    private Plateau plateau;
+    private Rose rose1;
+    private Rose rose2;
+    private Webcam webcam;
 
     public Simulation(int nbTours)
     {
-        // On sait pas trop s'il faut mettre des trucs ici...
+        this.nbTours = nbTours;
+        semaineActuelle = 1;
+        plateau = new Plateau(9,6); // Initialisation plateau
+        
+        rose1 = new Rose("Rose", "R"); // Création de deux roses : rose1 et rose2
+        rose2 = new Rose("Rose", "R"); 
+
+        webcam = new Webcam();
+
     }
 
     public void LancerSimulation()
@@ -13,32 +28,61 @@ public class Simulation
         AfficherEffet();
 
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Comment vous appelez vous jeune jardinier ?");
-        string nom = Convert.ToString(Console.ReadLine()!)!;
-        Joueur joueur1 = new Joueur(nom); // Création d'un joueur 
-        Console.WriteLine($"Bonjour {joueur1.Nom} ! La simulation va commencer !");
-        Console.WriteLine();
         Thread.Sleep(1000);
-
+        InitialiserPartie();
+        Console.WriteLine($"Bonjour {joueur1!.Nom} ! Et bienvenue dans ENSemenCe !!");
         Console.WriteLine($"Tu as {nbTours} semaines pour obtenir le plus beau des jardins");
-        Thread.Sleep(1000);
-
+        
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("⚠️ Attention, tu ne peut effectuer que 3 actions chaques semaines ! ⚠️ BONNE CHANCE");
         Thread.Sleep(1000);
-        
+        Console.WriteLine("⚠️ Attention, tu ne peut effectuer que 3 actions chaques semaines ! ⚠️ BONNE CHANCE");
+        Thread.Sleep(2000);
         Console.ForegroundColor = ConsoleColor.White;
+        Console.Clear();
 
-        Plateau plateau = new Plateau(9,6); // Création nouveau plateau
-        
-        Rose rose = new Rose("Rose", "R"); // Création d'une Rose
-        Rose rose2 = new Rose("Rose", "R");
+        while(semaineActuelle <= nbTours)
+        {   
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine($"Semaine {semaineActuelle}"); //Annonce numéro de semaine 
+            Console.ForegroundColor = ConsoleColor.White;
+            joueur1!.NbActionsPossibles = 4; // Initialisation nombre actions
+            
+            webcam.AfficherPlateau(plateau);
+            int choix = 10;
+            while(choix != 0 && joueur1.NbActionsPossibles!=0)
+            {
+                Console.WriteLine($"{joueur1!.Nom}, il te reste {joueur1.NbActionsPossibles} actions maximum !"); // Rappel nombre actions 
+                Console.WriteLine("Choisis l'action que tu souhaites effectuer");
+                Console.WriteLine("1. Semer ");
+                Console.WriteLine("0. Passer à la semaine suivant");
+                choix = Convert.ToInt32(Console.ReadLine()!);
 
+                if(choix !=0)
+                {
+                    if(choix ==1)
+                    {
+                        Console.WriteLine("Quelle plante voulez-vous semer ? (Ecrivez le nom)"); // A COMPLETER QUAND ON AURA TOUTES LES PLANTES 
+                        int index = 1;
+                        foreach(var plante in joueur1.InventaireSemis)
+                        {
+                            Console.WriteLine($"{index}. {plante.Nom}");
+                            index++;
+                        }
+                        Console.WriteLine("Entrez le numéro de la plante :");
+                        int numPlante = Convert.ToInt32(Console.ReadLine()!);
 
-        // Ajout de la Tomate dans l'inventaire de semis du joueur
-        joueur1.InventaireSemis.Add(rose);
-        joueur1.InventaireSemis.Add(rose2);
-        joueur1.Semer(plateau, "Terre", rose);
+                        var planteChoisie = joueur1.InventaireSemis[numPlante - 1];
+                        
+                        Console.WriteLine("Sur quel terrain voulez-vous semer la plante : terre, sable, argile (Ecrivez le nom)");
+                        string choixTerrain = Convert.ToString(Console.ReadLine()!.ToLower());
+                        joueur1!.Semer(plateau, choixTerrain, planteChoisie);
+                        plateau.AfficherPlateau();
+                    }
+                }
+            }
+
+        }   
+        joueur1!.Semer(plateau, "Terre", rose1); // Avec ! : joueur1 est garanti d'être initialisé
         plateau.AfficherPlateau();
         Thread.Sleep(1500);
         Console.Clear();
@@ -52,23 +96,23 @@ public class Simulation
     {
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("-");
-        Thread.Sleep(750);
+        Thread.Sleep(500);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("--");
-        Thread.Sleep(750);
+        Thread.Sleep(500);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("---");
-        Thread.Sleep(750);
+        Thread.Sleep(500);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("--- Bienvenue ");
-        Thread.Sleep(750);
+        Thread.Sleep(500);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("--- Bienvenue dans");
-        Thread.Sleep(750);
+        Thread.Sleep(500);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("--- Bienvenue dans ensemence ");
@@ -76,22 +120,35 @@ public class Simulation
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("--- Bienvenue dans ");
-        Thread.Sleep(1500);
+        Thread.Sleep(1000);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("--- Bienvenue dans ENSemenCe");
-        Thread.Sleep(750);
+        Thread.Sleep(500);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("--- Bienvenue dans ENSemenCe -");
-        Thread.Sleep(750);
+        Thread.Sleep(500);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("--- Bienvenue dans ENSemenCe --");
-        Thread.Sleep(750);
+        Thread.Sleep(500);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("--- Bienvenue dans ENSemenCe ---");
         Thread.Sleep(1500);
+    }
+
+    public void InitialiserPartie()
+    {
+        // Création d'un joueur 
+        Console.WriteLine("Comment vous appelez vous jeune jardinier ?");
+        string nom = Convert.ToString(Console.ReadLine()!)!;
+        joueur1 = new Joueur(nom); 
+
+        // Ajout des deux roses dans l'inventaire de semis du joueur
+        joueur1.InventaireSemis.Add(rose1);
+        joueur1.InventaireSemis.Add(rose2);
+        
     }
 }
