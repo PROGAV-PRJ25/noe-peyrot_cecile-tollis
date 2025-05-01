@@ -1,9 +1,9 @@
 public class Joueur
 {
-    public string Nom {get;set;}
-    public int NbActionsPossibles {get;set;}
-    public List<Plante> InventaireSemis {get;set;}
-    public List<string> InventaireRecoltes {get;set;}
+    public string Nom { get; set; }
+    public int NbActionsPossibles { get; set; }
+    public List<Plante> InventaireSemis { get; set; }
+    public List<string> InventaireRecoltes { get; set; }
 
     public Joueur(string nom)
     {
@@ -13,7 +13,7 @@ public class Joueur
         InventaireRecoltes = new List<string>();
     }
 
-    public void Semer(Plateau plateau, string typeTerrain, Plante plante)
+    public void Semer(Plateau plateau, Plante plante)
     {
         if (NbActionsPossibles==0)
         {
@@ -27,64 +27,63 @@ public class Joueur
             return;
         }
 
-        // Rechercher le terrain correspondant dans le plateau.
         Terrain? terrainCible = null;
-        foreach (var terrain in plateau.Terrains)
-        {
-            if (terrain.TypeTerrain == typeTerrain)
-            {
-                terrainCible = terrain;
-                break;
-            }
-        }
+        string typeTerrain = "";
+        bool terrainTrouve = false;
 
-        if (terrainCible==null) // Au cas où l'utilisateur tape un mauvais nom.
+        while (terrainTrouve==false)
         {
-            Console.WriteLine($"le terrain {typeTerrain} n'existe pas.");
-            return;
-        }
+            Console.WriteLine("Choisissez un terrain : Terre, Sable ou Argile.");
+            typeTerrain = Convert.ToString(Console.ReadLine()!.ToLower());
 
-        // On cherche une case vide dans ce terrain.
-        bool plantee = false;
-        for (int i=0; i<terrainCible.Cases.GetLength(0); i++)
-        {
-            for (int j=0; j<terrainCible.Cases.GetLength(1); j++)
+            foreach (var terrain in plateau.Terrains)
             {
-                if (terrainCible.Cases[i,j]==null)
+                if (terrain.TypeTerrain.ToLower()==typeTerrain)
                 {
-                    terrainCible.Cases[i,j] = plante;
-                    plantee = true;
-                    break;
+                    terrainCible = terrain;
+                    terrainTrouve = true;
                 }
             }
 
-            if (plantee) // Dès qu'on a planté, pas besoin de continuer à chercher.
+            if (terrainTrouve==false)
             {
-                break;
+                Console.WriteLine("Le terrain tapé est inconnu. Veuillez réessayer !");
             }
         }
 
-        if (plantee==true)
+        bool plantee = false;
+        for (int i=0; i<terrainCible?.Cases.GetLength(0); i++)
+        {
+            for (int j=0; j<terrainCible.Cases.GetLength(1); j++)
+            {
+                if ((plantee==false) && (terrainCible.Cases[i,j]==null))
+                {
+                    terrainCible.Cases[i,j] = plante;
+                    plantee = true;
+                }
+            }
+        }
+
+        if (plantee)
         {
             InventaireSemis.Remove(plante);
             NbActionsPossibles--;
             Console.WriteLine($"{plante.Nom} a été plantée dans le terrain {typeTerrain}.");
         }
+
         else
         {
-            Console.WriteLine($"La zone {typeTerrain} est pleine, il est donc impossible de planter {plante.Nom}.");
+            Console.WriteLine($"La zone {typeTerrain} est pleine. Impossible de planter {plante.Nom}.");
         }
     }
 
-
-
     public void Arroser(Plateau plateau, string typeTerrain)
     {
-       
+        // à compléter...
     }
 
     public void Recolter(Plateau plateau)
     {
-    
+        // à compléter...
     }
 }
