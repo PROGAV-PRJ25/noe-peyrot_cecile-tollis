@@ -13,5 +13,5 @@ joueur1.Semer(plateau, "Terre", rose);
 plateau.AfficherPlateau();
 */
 
-Simulation s = new Simulation(1);
+Simulation s = new Simulation(10);
 s.LancerSimulation();
