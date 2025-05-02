@@ -22,7 +22,9 @@ public abstract class Terrain
                     
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.Write($" {Cases[i,j]!.Symbole} "); // Case occupée par une plante (symbole de la plante) - ! évite la valeur nulle
+                    Console.ForegroundColor = ConsoleColor.White;
                 }       
             }
 
