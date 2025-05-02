@@ -34,9 +34,9 @@ public class Simulation
         Console.WriteLine($"Tu as {nbTours} semaines pour obtenir le plus beau des jardins");
         
         Console.ForegroundColor = ConsoleColor.Red;
-        Thread.Sleep(1000);
-        Console.WriteLine("⚠️ Attention, tu ne peut effectuer que 3 actions chaques semaines ! ⚠️ BONNE CHANCE");
         Thread.Sleep(2000);
+        Console.WriteLine("⚠️ Attention, tu ne peut effectuer que 3 actions chaques semaines ! ⚠️ BONNE CHANCE");
+        Thread.Sleep(4000);
         Console.ForegroundColor = ConsoleColor.White;
         Console.Clear();
 
@@ -48,46 +48,73 @@ public class Simulation
             joueur1!.NbActionsPossibles = 4; // Initialisation nombre actions
             
             webcam.AfficherPlateau(plateau);
-            int choix = 10;
+
+            int choix = 10; // au hasard différent de 0
             while(choix != 0 && joueur1.NbActionsPossibles!=0)
             {
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.WriteLine($"Semaine {semaineActuelle}"); //Annonce numéro de semaine 
+                Console.ForegroundColor = ConsoleColor.White;
+
                 Console.WriteLine($"{joueur1!.Nom}, il te reste {joueur1.NbActionsPossibles} actions maximum !"); // Rappel nombre actions 
                 Console.WriteLine("Choisis l'action que tu souhaites effectuer");
                 Console.WriteLine("1. Semer ");
-                Console.WriteLine("0. Passer à la semaine suivante");
+                Console.WriteLine("0. Passer à la semaine suivante");  
                 choix = Convert.ToInt32(Console.ReadLine()!);
 
+                Console.Clear();
                 if(choix !=0)
                 {
-                    if(choix ==1)
+                    if(choix ==1 )
                     {
-                        Console.WriteLine("Quelle plante voulez-vous semer ? (Ecrivez le nom)"); // A COMPLETER QUAND ON AURA TOUTES LES PLANTES 
-                        int index = 1;
-                        foreach(var plante in joueur1.InventaireSemis)
+                        if(joueur1.InventaireSemis.Count!=0)
                         {
-                            Console.WriteLine($"{index}. {plante.Nom}");
-                            index++;
-                        }
-                        Console.WriteLine("Entrez le numéro de la plante :");
-                        int numPlante = Convert.ToInt32(Console.ReadLine()!);
+                            bool bonnePlante = false;
+                            int numPlante = 0; // On déclare numPlante à l'extérieur de la boucle pour pouvoir l'utiliser en dehors
+                            while(!bonnePlante)
+                            {
+                                Console.WriteLine("Quelle plante voulez-vous semer ?"); // A COMPLETER QUAND ON AURA TOUTES LES PLANTES 
+                                int index = 1;
+                                foreach(var plante in joueur1.InventaireSemis) // On affiche toutes les plantes dans l'inventaire 
+                                {
+                                    Console.WriteLine($"{index}. {plante.Nom}");
+                                    index++;
+                                }
+                                Console.WriteLine("Entrez le numéro de la plante :");
+                                numPlante = Convert.ToInt32(Console.ReadLine()!);
 
-                        var planteChoisie = joueur1.InventaireSemis[numPlante - 1];
+                                if(numPlante <=0 || numPlante > joueur1.InventaireSemis.Count) 
+                                {
+                                    Console.Clear();
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("La plante choisie n'est pas dans la liste ! Tape le bon numéro ! ");
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                }
+                                else
+                                {
+                                    bonnePlante = true;
+                                }
+                            }
+                            
+                            var planteChoisie = joueur1.InventaireSemis[numPlante - 1];
+                            joueur1!.Semer(plateau, planteChoisie);
+                            plateau.AfficherPlateau();
+                        }
+                        else 
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Tu ne peux plus semer de plante, ton inventaire est vide !");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
                         
-                        joueur1!.Semer(plateau, planteChoisie);
-                        plateau.AfficherPlateau();
                     }
                 }
             }
+            Console.Clear();
+            semaineActuelle++;
 
         }   
-        joueur1!.Semer(plateau, rose1); // Avec ! : joueur1 est garanti d'être initialisé
-        plateau.AfficherPlateau();
-        Thread.Sleep(1500);
-        Console.Clear();
-        joueur1.Semer(plateau, rose2);
-        
-        plateau.AfficherPlateau();
-        
+                
     }
 
     public void AfficherEffet()
@@ -113,7 +140,7 @@ public class Simulation
         Thread.Sleep(500);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.WriteLine("--- Bienvenue dans ENSemenCe ");
+        Console.WriteLine("--- Bienvenue dans en semence ");
         Thread.Sleep(1500);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
