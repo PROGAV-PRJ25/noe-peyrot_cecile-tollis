@@ -48,10 +48,20 @@ public class Simulation
             joueur1!.NbActionsPossibles = 4; // Initialisation nombre actions
             
             webcam.AfficherPlateau(plateau);
+            
+            foreach(var plante in joueur1.PlantesSurJardin) // On affiche toutes les plantes déjà plantées pour suivre leur évolution 
+            {
+                plante.AfficherDonnees(plante);
+                Console.WriteLine();
+                Console.WriteLine("Appuie sur une touche pour continuer");
+                Console.ReadKey();
+                Console.WriteLine();
+            }
 
             int choix = 10; // au hasard différent de 0
             while(choix != 0 && joueur1.NbActionsPossibles!=0)
             {
+                Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
                 Console.WriteLine($"Semaine {semaineActuelle}"); //Annonce numéro de semaine 
                 Console.ForegroundColor = ConsoleColor.White;
@@ -176,4 +186,5 @@ public class Simulation
         joueur1.InventaireSemis.Add(rose2);
         
     }
+
 }
