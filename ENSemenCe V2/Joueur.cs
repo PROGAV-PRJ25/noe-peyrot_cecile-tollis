@@ -3,6 +3,7 @@ public class Joueur
     public string Nom {get;set;}
     public int NbActionsPossibles {get;set;}
     public List<Plante> InventaireSemis {get;set;}
+    public List<Plante> PlantesSurJardin {get;set;}
     public List<string> InventaireRecoltes {get;set;}
 
     public Joueur(string nom)
@@ -10,6 +11,7 @@ public class Joueur
         Nom = nom;
         NbActionsPossibles = 4;
         InventaireSemis = new List<Plante>();
+        PlantesSurJardin = new List<Plante>();
         InventaireRecoltes = new List<string>();
     }
 
@@ -67,6 +69,7 @@ public class Joueur
         if (plantee)
         {
             InventaireSemis.Remove(plante);
+            PlantesSurJardin.Add(plante);
             NbActionsPossibles--;
             Console.Clear();
             Console.WriteLine($"{plante.Nom} a été plantée dans le terrain {typeTerrain}.");
