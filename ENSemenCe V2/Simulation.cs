@@ -62,7 +62,7 @@ public class Simulation
             {
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                Console.WriteLine($"Semaine {semaineActuelle}"); //Annonce le numéro de la semaine 
+                Console.WriteLine($"Semaine {semaineActuelle}"); // Annonce le numéro de la semaine 
                 Console.ForegroundColor = ConsoleColor.White;
 
                 Console.WriteLine($"{joueur1!.Nom}, il te reste {joueur1.NbActionsPossibles} actions maximum !"); // Rappel du nombre d'actions 
