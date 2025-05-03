@@ -72,8 +72,9 @@ public class Simulation
                 Console.WriteLine($"{joueur1!.Nom}, il te reste {joueur1.NbActionsPossibles} actions maximum !"); // Rappel du nombre d'actions 
                 Console.WriteLine("Choisis l'action que tu souhaites effectuer :");
                 Console.WriteLine("1. Semer ");
-                Console.WriteLine("2. Récolter");
-                Console.WriteLine("3. Voir mes récoltes");
+                Console.WriteLine("2. Arroser");
+                Console.WriteLine("3. Récolter");
+                Console.WriteLine("4. Voir mes récoltes");
                 Console.WriteLine("0. Passer à la semaine suivante");  
                 choix = Convert.ToInt32(Console.ReadLine()!);
 
@@ -126,11 +127,18 @@ public class Simulation
 
                     else if (choix==2)
                     {
+                        Console.WriteLine("Sur quel type de terrain veux-tu arroser ? (Terre, Sable, Argile)");
+                        string typeTerrain = Console.ReadLine()!.ToLower();
+                        joueur1!.Arroser(plateau, typeTerrain);
+                    }
+
+                    else if (choix==3)
+                    {
                         joueur1!.Recolter(plateau);
                         plateau.AfficherPlateau();
                     }
 
-                    else if (choix==3)
+                    else if (choix==4)
                     {
                         joueur1!.AfficherInventaireRecoltes();
                     }
