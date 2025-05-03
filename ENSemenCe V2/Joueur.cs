@@ -83,8 +83,28 @@ public class Joueur
 
     public void Arroser(Plateau plateau, string typeTerrain)
     {
-        // à compléter...
+        foreach (var terrain in plateau.Terrains)
+        {
+            if (terrain.TypeTerrain==typeTerrain)
+            {
+                for (int i=0; i<terrain.Cases.GetLength(0); i++)
+                {
+                    for (int j=0; j<terrain.Cases.GetLength(1); j++)
+                    {
+                        // Si la case contient une plante, on lui ajoute de l'eau
+                        var plante = terrain.Cases[i,j];
+                        if (plante!=null)
+                        {
+                            plante.NiveauEau = Math.Min(plante.NiveauEau+10, 100); // Limite l'eau à 100
+                            Console.WriteLine($"La plante {plante.Nom} a été arrosée. Niveau d'eau : {plante.NiveauEau}/100");
+                            NbActionsPossibles--;
+                        }
+                    }
+                }
+            }
+        }
     }
+
 
     public void Recolter(Plateau plateau)
     {
