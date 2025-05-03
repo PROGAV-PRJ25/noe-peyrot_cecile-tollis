@@ -48,7 +48,7 @@ public class Simulation
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine($"Semaine {semaineActuelle}"); // Annonce le numéro de la semaine 
             Console.ForegroundColor = ConsoleColor.White;
-            joueur1!.NbActionsPossibles = 4; // Initialisation du nombre d'actions
+            joueur1!.NbActionsPossibles = 3; // Initialisation du nombre d'actions
             
             webcam.AfficherPlateau(plateau);
             
