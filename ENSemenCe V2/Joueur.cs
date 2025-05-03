@@ -131,6 +131,7 @@ public class Joueur
                     if (terrain.Cases[i,j]==planteARetirer)
                     {
                         terrain.Cases[i, j] = null;
+                        Console.Clear();
                         Console.WriteLine($"{planteARetirer.Nom} a été récoltée !");
                         PlantesSurJardin.Remove(planteARetirer);
                         InventaireRecoltes.Add(planteARetirer.Nom);
