@@ -72,7 +72,7 @@ public class Joueur
             PlantesSurJardin.Add(plante);
             NbActionsPossibles--;
             Console.Clear();
-            Console.WriteLine($"{plante.Nom} a été plantée dans le terrain {typeTerrain}.");
+            Console.WriteLine($"{plante.Nom} a été planté dans le terrain {typeTerrain}.");
         }
 
         else
