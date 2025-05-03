@@ -9,7 +9,7 @@ public class Joueur
     public Joueur(string nom)
     {
         Nom = nom;
-        NbActionsPossibles = 4;
+        NbActionsPossibles = 3;
         InventaireSemis = new List<Plante>();
         PlantesSurJardin = new List<Plante>();
         InventaireRecoltes = new List<string>();
