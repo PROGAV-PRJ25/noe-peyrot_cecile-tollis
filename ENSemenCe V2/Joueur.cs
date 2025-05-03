@@ -158,6 +158,7 @@ public class Joueur
             {
                 Console.WriteLine($"- {nom}");
             }
+            NbActionsPossibles--;
         }
     }
 
