@@ -2,7 +2,6 @@ public class Simulation
 {
     public int nbTours;
     public int semaineActuelle;
-
     private Joueur? joueur1;
     private Plateau plateau;
     private Rose rose1;
@@ -13,7 +12,7 @@ public class Simulation
     {
         this.nbTours = nbTours;
         semaineActuelle = 1;
-        plateau = new Plateau(9,6); // Initialisation plateau
+        plateau = new Plateau(9,6); // Initialisation du plateau
         
         rose1 = new Rose("Rose", "R"); // Création de deux roses : rose1 et rose2
         rose2 = new Rose("Rose", "R"); 
@@ -31,11 +30,11 @@ public class Simulation
         Thread.Sleep(1000);
         InitialiserPartie();
         Console.WriteLine($"Bonjour {joueur1!.Nom} ! Et bienvenue dans ENSemenCe !!");
-        Console.WriteLine($"Tu as {nbTours} semaines pour obtenir le plus beau des jardins");
+        Console.WriteLine($"Tu as {nbTours} semaines pour obtenir le plus beau des jardins !");
         
         Console.ForegroundColor = ConsoleColor.Red;
         Thread.Sleep(2000);
-        Console.WriteLine("⚠️ Attention, tu ne peut effectuer que 3 actions chaques semaines ! ⚠️ BONNE CHANCE");
+        Console.WriteLine("⚠️ Attention, tu ne peux effectuer que 3 actions chaque semaine ! ⚠️ Bonne chance !");
         Thread.Sleep(4000);
         Console.ForegroundColor = ConsoleColor.White;
         Console.Clear();
@@ -43,9 +42,9 @@ public class Simulation
         while(semaineActuelle <= nbTours)
         {   
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            Console.WriteLine($"Semaine {semaineActuelle}"); //Annonce numéro de semaine 
+            Console.WriteLine($"Semaine {semaineActuelle}"); // Annonce le numéro de la semaine 
             Console.ForegroundColor = ConsoleColor.White;
-            joueur1!.NbActionsPossibles = 4; // Initialisation nombre actions
+            joueur1!.NbActionsPossibles = 4; // Initialisation du nombre d'actions
             
             webcam.AfficherPlateau(plateau);
             
@@ -58,15 +57,15 @@ public class Simulation
                 Console.WriteLine();
             }
 
-            int choix = 10; // au hasard différent de 0
+            int choix = 10; // Au hasard et différent de 0
             while(choix != 0 && joueur1.NbActionsPossibles!=0)
             {
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                Console.WriteLine($"Semaine {semaineActuelle}"); //Annonce numéro de semaine 
+                Console.WriteLine($"Semaine {semaineActuelle}"); //Annonce le numéro de la semaine 
                 Console.ForegroundColor = ConsoleColor.White;
 
-                Console.WriteLine($"{joueur1!.Nom}, il te reste {joueur1.NbActionsPossibles} actions maximum !"); // Rappel nombre actions 
+                Console.WriteLine($"{joueur1!.Nom}, il te reste {joueur1.NbActionsPossibles} actions maximum !"); // Rappel du nombre d'actions 
                 Console.WriteLine("Choisis l'action que tu souhaites effectuer");
                 Console.WriteLine("1. Semer ");
                 Console.WriteLine("0. Passer à la semaine suivante");  
@@ -75,7 +74,7 @@ public class Simulation
                 Console.Clear();
                 if(choix !=0)
                 {
-                    if(choix ==1 )
+                    if(choix==1)
                     {
                         if(joueur1.InventaireSemis.Count!=0)
                         {
@@ -97,7 +96,7 @@ public class Simulation
                                 {
                                     Console.Clear();
                                     Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine("La plante choisie n'est pas dans la liste ! Tape le bon numéro ! ");
+                                    Console.WriteLine("La plante choisie n'est pas dans la liste ! Tape le bon numéro !");
                                     Console.ForegroundColor = ConsoleColor.White;
                                 }
                                 else
@@ -113,7 +112,7 @@ public class Simulation
                         else 
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Tu ne peux plus semer de plante, ton inventaire est vide !");
+                            Console.WriteLine("Tu ne peux plus semer de plantes, ton inventaire est vide !");
                             Console.ForegroundColor = ConsoleColor.White;
                         }
                         
@@ -142,7 +141,7 @@ public class Simulation
         Thread.Sleep(500);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.WriteLine("--- Bienvenue ");
+        Console.WriteLine("--- Bienvenue");
         Thread.Sleep(500);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -150,11 +149,11 @@ public class Simulation
         Thread.Sleep(500);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.WriteLine("--- Bienvenue dans en semence ");
+        Console.WriteLine("--- Bienvenue dans en semence");
         Thread.Sleep(1500);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.WriteLine("--- Bienvenue dans ");
+        Console.WriteLine("--- Bienvenue dans");
         Thread.Sleep(1000);
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -177,7 +176,7 @@ public class Simulation
     public void InitialiserPartie()
     {
         // Création d'un joueur 
-        Console.WriteLine("Comment vous appelez vous jeune jardinier ?");
+        Console.WriteLine("Comment vous appelez-vous jeune jardinier ?");
         string nom = Convert.ToString(Console.ReadLine()!)!;
         joueur1 = new Joueur(nom); 
 
