@@ -33,7 +33,7 @@ public abstract class Plante
             Console.Write("--> La plante a besoin d'eau ! "); 
             Console.ForegroundColor = ConsoleColor.White;
         }
-        Console.WriteLine($"    - Etat de santé : {plante.EtatSante}/10"); 
+        Console.WriteLine($"    - État de santé : {plante.EtatSante}/10"); 
         if(plante.EtatSante <5)
         {
             Console.ForegroundColor = ConsoleColor.Red;
