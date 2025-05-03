@@ -72,7 +72,7 @@ public class Simulation
                 Console.WriteLine($"{joueur1!.Nom}, il te reste {joueur1.NbActionsPossibles} actions maximum !"); // Rappel du nombre d'actions 
                 Console.WriteLine("Choisis l'action que tu souhaites effectuer :");
                 Console.WriteLine("1. Semer ");
-                Console.WriteLine("2. Passer à la semaine suivante");  
+                Console.WriteLine("0. Passer à la semaine suivante");  
                 choix = Convert.ToInt32(Console.ReadLine()!);
 
                 Console.Clear();
