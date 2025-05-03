@@ -7,6 +7,7 @@ public class Simulation
     private Rose rose1;
     private Rose rose2;
     private Cerise cerise1;
+    private Endive endive1;
     private Webcam webcam;
 
     public Simulation(int nbTours)
@@ -17,7 +18,8 @@ public class Simulation
         
         rose1 = new Rose("Rose", "R"); // Création de deux roses : rose1 et rose2
         rose2 = new Rose("Rose", "R"); 
-        cerise1 = new Cerise("Cerise", "C"); // Création d'un objet Cerise
+        cerise1 = new Cerise("Cerise", "C"); // Création d'une cerise
+        endive1 = new Endive("Endive", "E"); // Création d'une cerise
 
         webcam = new Webcam();
 
@@ -84,14 +86,14 @@ public class Simulation
                             int numPlante = 0; // On déclare numPlante à l'extérieur de la boucle pour pouvoir l'utiliser en dehors
                             while(!bonnePlante)
                             {
-                                Console.WriteLine("Quelle plante voulez-vous semer ?"); // A COMPLETER QUAND ON AURA TOUTES LES PLANTES 
+                                Console.WriteLine("Quelle plante veux-tu semer ?"); // A COMPLETER QUAND ON AURA TOUTES LES PLANTES 
                                 int index = 1;
                                 foreach(var plante in joueur1.InventaireSemis) // On affiche toutes les plantes dans l'inventaire 
                                 {
                                     Console.WriteLine($"{index}. {plante.Nom}");
                                     index++;
                                 }
-                                Console.WriteLine("Entrez le numéro de la plante :");
+                                Console.WriteLine("Entre le numéro de la plante :");
                                 numPlante = Convert.ToInt32(Console.ReadLine()!);
 
                                 if(numPlante <=0 || numPlante > joueur1.InventaireSemis.Count) 
@@ -178,7 +180,7 @@ public class Simulation
     public void InitialiserPartie()
     {
         // Création d'un joueur 
-        Console.WriteLine("Comment vous appelez-vous jeune jardinier ?");
+        Console.WriteLine("Comment t'appelles-tu jeune jardinier ?");
         string nom = Convert.ToString(Console.ReadLine()!)!;
         joueur1 = new Joueur(nom); 
 
@@ -186,7 +188,7 @@ public class Simulation
         joueur1.InventaireSemis.Add(rose1);
         joueur1.InventaireSemis.Add(rose2);
         joueur1.InventaireSemis.Add(cerise1);
-        
+        joueur1.InventaireSemis.Add(endive1);
     }
 
 }
