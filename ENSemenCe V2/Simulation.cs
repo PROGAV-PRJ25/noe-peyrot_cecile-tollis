@@ -6,6 +6,7 @@ public class Simulation
     private Plateau plateau;
     private Rose rose1;
     private Rose rose2;
+    private Cerise cerise1;
     private Webcam webcam;
 
     public Simulation(int nbTours)
@@ -16,6 +17,7 @@ public class Simulation
         
         rose1 = new Rose("Rose", "R"); // Création de deux roses : rose1 et rose2
         rose2 = new Rose("Rose", "R"); 
+        cerise1 = new Cerise("Cerise", "C"); // Création d'un objet Cerise
 
         webcam = new Webcam();
 
@@ -34,7 +36,7 @@ public class Simulation
         
         Console.ForegroundColor = ConsoleColor.Red;
         Thread.Sleep(2000);
-        Console.WriteLine("⚠️ Attention, tu ne peux effectuer que 3 actions chaque semaine ! ⚠️ Bonne chance !");
+        Console.WriteLine("⚠️ Attention, tu ne peux effectuer que 3 actions chaque semaine ! ⚠️  Bonne chance !");
         Thread.Sleep(4000);
         Console.ForegroundColor = ConsoleColor.White;
         Console.Clear();
@@ -66,9 +68,9 @@ public class Simulation
                 Console.ForegroundColor = ConsoleColor.White;
 
                 Console.WriteLine($"{joueur1!.Nom}, il te reste {joueur1.NbActionsPossibles} actions maximum !"); // Rappel du nombre d'actions 
-                Console.WriteLine("Choisis l'action que tu souhaites effectuer");
+                Console.WriteLine("Choisis l'action que tu souhaites effectuer :");
                 Console.WriteLine("1. Semer ");
-                Console.WriteLine("0. Passer à la semaine suivante");  
+                Console.WriteLine("2. Passer à la semaine suivante");  
                 choix = Convert.ToInt32(Console.ReadLine()!);
 
                 Console.Clear();
@@ -183,6 +185,7 @@ public class Simulation
         // Ajout des deux roses dans l'inventaire de semis du joueur
         joueur1.InventaireSemis.Add(rose1);
         joueur1.InventaireSemis.Add(rose2);
+        joueur1.InventaireSemis.Add(cerise1);
         
     }
 
