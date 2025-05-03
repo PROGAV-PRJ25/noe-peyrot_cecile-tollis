@@ -19,13 +19,13 @@ public class Joueur
     {
         if (NbActionsPossibles==0)
         {
-            Console.WriteLine("Vous n'avez plus d'actions pour ce tour !");
+            Console.WriteLine("Tu n'as plus d'actions pour ce tour !");
             return;
         }
 
         if (!InventaireSemis.Contains(plante))
         {
-            Console.WriteLine("Cette plante n’est pas dans votre inventaire !");
+            Console.WriteLine("Cette plante n’est pas dans ton inventaire !");
             return;
         }
 
@@ -35,7 +35,7 @@ public class Joueur
 
         while (terrainTrouve==false)
         {
-            Console.WriteLine($"Choisissez un terrain pour {plante.Nom}: Terre, Sable ou Argile.");
+            Console.WriteLine($"Choisis un terrain pour {plante.Nom}: Terre, Sable ou Argile.");
             typeTerrain = Convert.ToString(Console.ReadLine()!.ToLower());
 
             foreach (var terrain in plateau.Terrains)
@@ -49,7 +49,7 @@ public class Joueur
 
             if (terrainTrouve==false)
             {
-                Console.WriteLine("Le terrain tapé est inconnu. Veuillez réessayer !");
+                Console.WriteLine("Le terrain tapé est inconnu. Réessaie !");
             }
         }
 
@@ -72,7 +72,7 @@ public class Joueur
             PlantesSurJardin.Add(plante);
             NbActionsPossibles--;
             Console.Clear();
-            Console.WriteLine($"{plante.Nom} a été planté dans le terrain {typeTerrain}.");
+            Console.WriteLine($"{plante.Nom} a été plantée dans le terrain {typeTerrain}.");
         }
 
         else
