@@ -2,20 +2,21 @@ public abstract class Plante
 {
     public string Symbole {get; set;}
     public string Nom {get;set;}
-    public int NiveauCroissance {get;set;}
     public int NiveauEau {get;set;}
     public int EtatSante {get;set;}
     public bool EstVivante {get;set;}
     public bool EstMure {get;set;}
     public bool EstMalade {get;set;}
+    public int VitesseCroissance {get;set;}
+    public string TerrainPrefere { get; set; } = "Inconnu "; // required : oblige les classes dérivées à l’initialiser
+    public Terrain? TerrainActuel {get;set;} = null;
 
     public Plante(string nom, string symbole)
     {
         Symbole = symbole;
         Nom = nom;
-        NiveauCroissance = 0;
         NiveauEau = 100; // La plante n'a pas besoin d'eau au tout début.
-        EtatSante = 4; // la plante est en parfaite santé au tout début.
+        EtatSante = 10; // la plante est en parfaite santé au tout début.
         EstVivante = true;
         EstMure = false;
         EstMalade = false;
@@ -45,4 +46,45 @@ public abstract class Plante
     }
 
     public abstract void Pousser();
+
+    public void VerifierConditions(Joueur joueur, Plateau plateau)
+    {
+        int nbConditionsRespectees = 4;
+        foreach(var plante in joueur.PlantesSurJardin)
+        {
+            if(plante.NiveauEau < 50)
+            {
+                nbConditionsRespectees --;
+                plante.EtatSante -=1;
+            }
+
+            if(plante.TerrainPrefere != plante.TerrainActuel!.TypeTerrain)
+            {
+                nbConditionsRespectees --;
+                plante.EtatSante -=1;
+            }
+
+            if(plante.EtatSante <=0)
+            {
+                plante.EstVivante = false;
+                SupprimerPlante(plante, plante.TerrainActuel);
+
+            }
+        }
+    }
+
+    public void SupprimerPlante(Plante plante, Terrain terrain)
+    {
+        for (int i=0; i<terrain.Cases.GetLength(0); i++)
+        {
+            for (int j=0; j<terrain.Cases.GetLength(1); j++)
+            {
+                if (terrain.Cases[i,j] == plante)
+                {
+                    terrain.Cases[i,j] = null;
+
+                }   
+            }
+        }
+    }
 }
