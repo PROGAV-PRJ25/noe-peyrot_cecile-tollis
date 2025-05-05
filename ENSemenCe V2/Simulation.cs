@@ -53,7 +53,7 @@ public class Simulation
             Console.WriteLine($"Semaine {semaineActuelle}"); // Annonce le numéro de la semaine 
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("La météo de la semaine est : ");
-            meteo.AppliquerMeteo(); // Annonce la météo de la semaine
+            Console.WriteLine(meteo.ChangerMeteo()); // Annonce la météo de la semaine
             joueur1!.NbActionsPossibles = 3; // Initialisation du nombre d'actions
             
             webcam.AfficherPlateau(plateau);
