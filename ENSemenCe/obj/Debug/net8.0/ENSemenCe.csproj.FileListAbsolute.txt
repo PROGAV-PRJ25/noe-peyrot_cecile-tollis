@@ -1,0 +1,14 @@
+H:\ENSemenCe\bin\Debug\net8.0\ENSemenCe.exe
+H:\ENSemenCe\bin\Debug\net8.0\ENSemenCe.deps.json
+H:\ENSemenCe\bin\Debug\net8.0\ENSemenCe.runtimeconfig.json
+H:\ENSemenCe\bin\Debug\net8.0\ENSemenCe.dll
+H:\ENSemenCe\bin\Debug\net8.0\ENSemenCe.pdb
+H:\ENSemenCe\obj\Debug\net8.0\ENSemenCe.GeneratedMSBuildEditorConfig.editorconfig
+H:\ENSemenCe\obj\Debug\net8.0\ENSemenCe.AssemblyInfoInputs.cache
+H:\ENSemenCe\obj\Debug\net8.0\ENSemenCe.AssemblyInfo.cs
+H:\ENSemenCe\obj\Debug\net8.0\ENSemenCe.csproj.CoreCompileInputs.cache
+H:\ENSemenCe\obj\Debug\net8.0\ENSemenCe.dll
+H:\ENSemenCe\obj\Debug\net8.0\refint\ENSemenCe.dll
+H:\ENSemenCe\obj\Debug\net8.0\ENSemenCe.pdb
+H:\ENSemenCe\obj\Debug\net8.0\ENSemenCe.genruntimeconfig.cache
+H:\ENSemenCe\obj\Debug\net8.0\ref\ENSemenCe.dll
