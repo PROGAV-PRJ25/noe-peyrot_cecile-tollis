@@ -1,3 +1,5 @@
+using System.Diagnostics.Metrics;
+
 public class Simulation
 {
     public int nbTours;
@@ -9,6 +11,7 @@ public class Simulation
     private Cerise cerise1;
     private Endive endive1;
     private Webcam webcam;
+    private Meteo meteo;
 
     public Simulation(int nbTours)
     {
@@ -22,6 +25,7 @@ public class Simulation
         endive1 = new Endive("Endive", "E"); // Création d'une cerise
 
         webcam = new Webcam();
+        meteo = new Meteo();
 
     }
 
@@ -48,6 +52,8 @@ public class Simulation
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine($"Semaine {semaineActuelle}"); // Annonce le numéro de la semaine 
             Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("La météo de la semaine est : ");
+            meteo.AppliquerMeteo(); // Annonce la météo de la semaine
             joueur1!.NbActionsPossibles = 3; // Initialisation du nombre d'actions
             
             webcam.AfficherPlateau(plateau);
@@ -146,7 +152,6 @@ public class Simulation
             }
             Console.Clear();
             semaineActuelle++;
-
         }   
                 
     }
