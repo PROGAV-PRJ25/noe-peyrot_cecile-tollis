@@ -70,6 +70,7 @@ public class Joueur
         {
             InventaireSemis.Remove(plante);
             PlantesSurJardin.Add(plante);
+            plante.TerrainActuel!.TypeTerrain = typeTerrain;
             NbActionsPossibles--;
             Console.Clear();
             Console.WriteLine($"{plante.Nom} a été plantée dans le terrain {typeTerrain}.");
