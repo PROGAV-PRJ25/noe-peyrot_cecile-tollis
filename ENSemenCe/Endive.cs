@@ -1,6 +1,5 @@
 public class Endive : Plante
 {
-    public string TerrainPrefere { get; set; }
     public int NbMaxParTerrain = 3; 
     public int StadeCroissance { get; private set; } = 0; // Commence au stade 0
 
