@@ -128,7 +128,7 @@ public class Simulation
                     else if (choix==2)
                     {
                         Console.WriteLine("Sur quel type de terrain veux-tu arroser ? (Terre, Sable, Argile)");
-                        string typeTerrain = Console.ReadLine()!.ToLower();
+                        string typeTerrain = Convert.ToString(Console.ReadLine()!.ToLower());
                         joueur1!.Arroser(plateau, typeTerrain);
                     }
 
