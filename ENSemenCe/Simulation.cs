@@ -1,5 +1,3 @@
-using System.Diagnostics.Metrics;
-
 public class Simulation
 {
     public int nbTours;
