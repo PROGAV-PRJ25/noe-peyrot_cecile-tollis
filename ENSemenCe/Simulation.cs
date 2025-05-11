@@ -52,6 +52,7 @@ public class Simulation
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("La météo de la semaine est : ");
             Console.WriteLine(meteo.ChangerMeteo()); // Annonce la météo de la semaine
+            meteo.AppliquerMeteo(joueur1, plateau);   // Applique les effets météo
             joueur1!.NbActionsPossibles = 3; // Initialisation du nombre d'actions
             
             webcam.AfficherPlateau(plateau);
@@ -93,14 +94,14 @@ public class Simulation
                             int numPlante = 0; // On déclare numPlante à l'extérieur de la boucle pour pouvoir l'utiliser en dehors
                             while(!bonnePlante)
                             {
-                                Console.WriteLine("Quelle plante veux-tu semer ?"); // A COMPLETER QUAND ON AURA TOUTES LES PLANTES 
+                                Console.WriteLine("Quelle plante veux-tu semer ?"); 
                                 int index = 1;
                                 foreach(var plante in joueur1.InventaireSemis) // On affiche toutes les plantes dans l'inventaire 
                                 {
                                     Console.WriteLine($"{index}. {plante.Nom}");
                                     index++;
                                 }
-                                Console.WriteLine("Entre le numéro de la plante :");
+                                Console.WriteLine("Entre le numéro de la plante : ");
                                 numPlante = Convert.ToInt32(Console.ReadLine()!);
 
                                 if(numPlante <=0 || numPlante > joueur1.InventaireSemis.Count) 
