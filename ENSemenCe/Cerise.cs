@@ -1,8 +1,7 @@
 public class Cerise : Plante
 {
     public int NbMaxParTerrain = 3; 
-    public int StadeCroissance { get; private set; } = 0; // Commence au stade 0
-
+    
     public Cerise(string nom, string symbole) : base(nom, symbole)
     {
         TerrainPrefere = "Terre"; 
