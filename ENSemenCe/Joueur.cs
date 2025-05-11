@@ -35,7 +35,7 @@ public class Joueur
 
         while (terrainTrouve==false)
         {
-            Console.WriteLine($"Choisis un terrain pour {plante.Nom}: Terre, Sable ou Argile.");
+            Console.WriteLine($"Choisis un terrain pour {plante.Nom} : Terre, Sable ou Argile.");
             typeTerrain = Convert.ToString(Console.ReadLine()!.ToLower());
 
             foreach (var terrain in plateau.Terrains)
@@ -70,7 +70,7 @@ public class Joueur
         {
             InventaireSemis.Remove(plante);
             PlantesSurJardin.Add(plante);
-            plante.TerrainActuel!.TypeTerrain = typeTerrain;
+            plante.TerrainActuel = terrainCible;
             NbActionsPossibles--;
             Console.Clear();
             Console.WriteLine($"{plante.Nom} a été plantée dans le terrain {typeTerrain}.");
