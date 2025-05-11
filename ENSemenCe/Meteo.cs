@@ -36,13 +36,72 @@ public class Meteo
         return MeteoActuelle;
     }
 
-    public void AppliquerMeteo()
+    public void AppliquerMeteo(Joueur joueur, Plateau plateau)
     {
-        
+        switch (MeteoActuelle)
+        {
+            case "Petite pluie":
+                Console.WriteLine("Une petite pluie vient arroser les plantes !");
+                foreach (var plante in joueur.PlantesSurJardin)
+                {
+                    plante.NiveauEau += 1;
+                }
+                break;
+
+            case "Soleil":
+                Console.WriteLine("Un beau soleil est présent dans le ciel, les plantes poussent normalement.");
+                // Pas d'effet particulier
+                break;
+
+            case "Nuageux":
+                Console.WriteLine("Le ciel est couvert, les plantes ne poussent pas aussi vite que prévu...");
+                foreach (var plante in joueur.PlantesSurJardin)
+                {
+                    if(plante.StadeCroissance>0)
+                    {
+                        plante.StadeCroissance--;
+                    }
+                }
+                break;
+
+            case "Grosse pluie":
+                Console.WriteLine("Attention à la grosse pluie ! Certaines plantes risquent la noyade...");
+                foreach (var plante in joueur.PlantesSurJardin)
+                {
+                    plante.NiveauEau += 20;
+                }
+                break;
+
+            case "Sécheresse":
+                Console.WriteLine("Une sécheresse affaiblit les plantes !");
+                foreach (var plante in joueur.PlantesSurJardin)
+                {
+                    plante.NiveauEau -= 20;
+                    if (plante.NiveauEau < 0) 
+                    {
+                        plante.NiveauEau = 0; // On évite un niveau d'eau négatif comme cela.
+                    }
+                }
+                break;
+
+            case "Tornade":
+                Console.WriteLine("Une tornade a arraché des plantes !");
+                joueur.PlantesSurJardin.Clear(); // Effet extrême, à peaufiner.
+                break;
+
+            case "Petit vent":
+                Console.WriteLine("Un petit vent a déplacé les plantes !");
+                // Effet à coder.
+                break;
+
+            default:
+                Console.WriteLine("Météo inconnue, aucun effet.");
+                break;
+        }
     }
+
 
     // Il faudrait qu'on fasse une fonction qui détermine quelle météo est considérée comme dangereuse et donc activant le mode urgence.
 }
-
 
 
