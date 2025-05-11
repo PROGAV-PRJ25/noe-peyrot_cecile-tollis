@@ -90,9 +90,89 @@ public class Meteo
                 break;
 
             case "Petit vent":
-                Console.WriteLine("Un petit vent a déplacé les plantes !");
-                // Effet à coder.
+                if (joueur.PlantesSurJardin.Count>=2)
+                {
+                    Random rnd = new Random();
+                    int i1 = rnd.Next(joueur.PlantesSurJardin.Count);
+                    int i2 = rnd.Next(joueur.PlantesSurJardin.Count);
+
+                    // Utilisation d'un while pour ne pas échanger une plante avec elle-même :
+                    while (i2==i1)
+                    {
+                        i2 = rnd.Next(joueur.PlantesSurJardin.Count);
+                    }
+
+                    Plante plante1 = joueur.PlantesSurJardin[i1];
+                    Plante plante2 = joueur.PlantesSurJardin[i2];
+
+                    // Identifier sur quel terrain ces plantes se trouvent, et les échanger dans les cases
+                    Terrain? terrainCible1 = plante1.TerrainActuel;
+                    Terrain? terrainCible2 = plante2.TerrainActuel;
+
+                    if (terrainCible1!=null && terrainCible2!=null)
+                    {
+                        // Ce sont les coordonnées des plantes, on les fixe à une valeur initiale qui permettra de savoir si on a bien trouvé les plantes.
+                        int x1 = -1;
+                        int y1 = -1;
+                        int x2 = -1;
+                        int y2 = -1;
+
+                        // Chercher la plante 1
+                        for (int i=0; i<terrainCible1.Cases.GetLength(0); i++)
+                        {
+                            for (int j=0; j<terrainCible1.Cases.GetLength(1); j++)
+                            {
+                                if (terrainCible1.Cases[i,j]==plante1)
+                                {
+                                    x1 = i;
+                                    y1 = j;
+                                    break;
+                                }
+                            }
+                        }
+
+                        // Chercher la plante 2
+                        for (int i=0; i<terrainCible2.Cases.GetLength(0); i++)
+                        {
+                            for (int j=0; j<terrainCible2.Cases.GetLength(1); j++)
+                            {
+                                if (terrainCible2.Cases[i,j]==plante2)
+                                {
+                                    x2 = i;
+                                    y2 = j;
+                                    break;
+                                }
+                            }
+                        }
+
+                        // Échanger les plantes dans les cases du terrain
+                        if (x1!=-1 && y1!=-1 && x2!=-1 && y2!=-1)
+                        {
+                            terrainCible1.Cases[x1,y1] = plante2;
+                            terrainCible2.Cases[x2,y2] = plante1;
+
+                            Console.WriteLine("Un petit vent a soufflé ! Deux plantes ont changé de place dans ton jardin.");
+                        }
+
+                        else
+                        {
+                            Console.WriteLine("Impossible de trouver les plantes à échanger sur les terrains.");
+                        }
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("Une des plantes n'est pas dans un terrain valide.");
+                    }
+                }
+
+                else
+                {
+                    Console.WriteLine("Petit vent, mais pas assez de plantes pour échanger.");
+                }
+
                 break;
+
 
             default:
                 Console.WriteLine("Météo inconnue, aucun effet.");
