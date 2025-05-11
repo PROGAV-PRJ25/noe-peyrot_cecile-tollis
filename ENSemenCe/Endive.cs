@@ -1,7 +1,7 @@
 public class Endive : Plante
 {
     public int NbMaxParTerrain = 3; 
-
+    
     public Endive(string nom, string symbole) : base(nom, symbole)
     {
         TerrainPrefere = "Terre"; 
