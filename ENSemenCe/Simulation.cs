@@ -40,7 +40,7 @@ public class Simulation
         
         Console.ForegroundColor = ConsoleColor.Red;
         Thread.Sleep(2000);
-        Console.WriteLine("⚠️ Attention, tu ne peux effectuer que 3 actions chaque semaine ! ⚠️  Bonne chance !");
+        Console.WriteLine("⚠️  Attention, tu ne peux effectuer que 3 actions chaque semaine ! ⚠️  Bonne chance !");
         Thread.Sleep(4000);
         Console.ForegroundColor = ConsoleColor.White;
         Console.Clear();
