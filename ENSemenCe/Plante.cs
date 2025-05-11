@@ -7,7 +7,7 @@ public abstract class Plante
     public bool EstVivante {get;set;}
     public bool EstMure {get;set;}
     public bool EstMalade {get;set;}
-    public int VitesseCroissance {get;set;}
+    public int StadeCroissance { get; set; } = 0; // Commence au stade 0
     public string TerrainPrefere { get; set; } = "Inconnu "; // required : oblige les classes dérivées à l’initialiser
     public Terrain? TerrainActuel {get;set;} = null;
 
