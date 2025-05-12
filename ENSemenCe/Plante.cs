@@ -24,6 +24,7 @@ public abstract class Plante
 
     public void AfficherDonnees(Plante plante)
     {
+        VerifierConditions(plante);
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine($"--- {plante.Nom} --- ");
         Console.ForegroundColor = ConsoleColor.White;
@@ -47,29 +48,43 @@ public abstract class Plante
 
     public abstract void Pousser();
 
-    public void VerifierConditions(Joueur joueur, Plateau plateau)
+    public void VerifierConditions(Plante plante)
     {
-        int nbConditionsRespectees = 4;
-        foreach(var plante in joueur.PlantesSurJardin)
+        int nbConditionsRespectees = 3;
+        if(plante.NiveauEau < 50)
         {
-            if(plante.NiveauEau < 50)
-            {
-                nbConditionsRespectees --;
-                plante.EtatSante -=1;
-            }
+            nbConditionsRespectees --;
+            plante.EtatSante -=2;
+        }
+        if(plante.NiveauEau<70 && plante.NiveauEau>50)
+        {
+            plante.EtatSante -=1;
+        }
 
-            if(plante.TerrainPrefere != plante.TerrainActuel!.TypeTerrain)
-            {
-                nbConditionsRespectees --;
-                plante.EtatSante -=1;
-            }
+        if(plante.TerrainPrefere != plante.TerrainActuel!.TypeTerrain)
+        {
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Oh non {plante.Nom} n'est pas sur son terrain préféré qui est {plante.TerrainPrefere} !");
+            Console.BackgroundColor = ConsoleColor.White;
+            nbConditionsRespectees --;
+            plante.EtatSante -=1;
+        }
 
-            if(plante.EtatSante <=0)
-            {
-                plante.EstVivante = false;
-                SupprimerPlante(plante, plante.TerrainActuel);
+        if(plante.EstMalade)
+        {
+            nbConditionsRespectees --;
+            plante.EtatSante -=3;
+        }
 
-            }
+        if(nbConditionsRespectees <=1)
+        {
+            plante.EtatSante =0;
+        }
+
+        if(plante.EtatSante <=0)
+        {
+            plante.EstVivante = false;
+            SupprimerPlante(plante, plante.TerrainActuel!);
         }
     }
 
