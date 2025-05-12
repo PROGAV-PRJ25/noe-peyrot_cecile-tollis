@@ -4,7 +4,7 @@ public class Endive : Plante
     
     public Endive(string nom, string symbole) : base(nom, symbole)
     {
-        TerrainPrefere = "Terre"; 
+        TerrainPrefere = "terre"; 
     }
 
     public override void Pousser()
