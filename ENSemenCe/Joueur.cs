@@ -1,60 +1,186 @@
-public class Endive : Plante
+public class Joueur
 {
-    public int NbMaxParTerrain = 3; 
-    
-    public Endive(string nom, string symbole) : base(nom, symbole)
+    public string Nom {get;set;}
+    public int NbActionsPossibles {get;set;}
+    public List<Plante> InventaireSemis {get;set;}
+    public List<Plante> PlantesSurJardin {get;set;}
+    public List<string> InventaireRecoltes {get;set;}
+
+    public Joueur(string nom)
     {
-        TerrainPrefere = "Terre"; 
+        Nom = nom;
+        NbActionsPossibles = 3;
+        InventaireSemis = new List<Plante>();
+        PlantesSurJardin = new List<Plante>();
+        InventaireRecoltes = new List<string>();
     }
 
-    public override void Pousser()
+    public void Semer(Plateau plateau, Plante plante)
     {
-        if (StadeCroissance < 5) // Il y a 5 stades (de 1 à 5)
+        if (NbActionsPossibles==0)
         {
-            StadeCroissance++;
-            Console.WriteLine($"L'endive a poussé ! Elle est maintenant au stade {StadeCroissance}.");
-            Console.WriteLine("--- Aperçu --- ");
-            Console.WriteLine();
+            Console.WriteLine("Tu n'as plus d'actions pour ce tour !");
+            return;
         }
+
+        if (!InventaireSemis.Contains(plante))
+        {
+            Console.WriteLine("Cette plante n’est pas dans ton inventaire !");
+            return;
+        }
+
+        Terrain? terrainCible = null;
+        string typeTerrain = "";
+        bool terrainTrouve = false;
+
+        while (terrainTrouve==false)
+        {
+            Console.WriteLine($"Choisis un terrain pour {plante.Nom} : Terre, Sable ou Argile.");
+            typeTerrain = Convert.ToString(Console.ReadLine()!.ToLower());
+
+            foreach (var terrain in plateau.Terrains)
+            {
+                if (terrain.TypeTerrain.ToLower()==typeTerrain)
+                {
+                    terrainCible = terrain;
+                    terrainTrouve = true;
+                }
+            }
+
+            if (terrainTrouve==false)
+            {
+                Console.WriteLine("Le terrain tapé est inconnu. Réessaie !");
+            }
+        }
+
+        bool plantee = false;
+        for (int i=0; i<terrainCible?.Cases.GetLength(0); i++)
+        {
+            for (int j=0; j<terrainCible.Cases.GetLength(1); j++)
+            {
+                if ((plantee==false) && (terrainCible.Cases[i,j]==null))
+                {
+                    terrainCible.Cases[i,j] = plante;
+                    plantee = true;
+                }
+            }
+        }
+
+        if (plantee)
+        {
+            InventaireSemis.Remove(plante);
+            PlantesSurJardin.Add(plante);
+            plante.TerrainActuel = terrainCible;
+            NbActionsPossibles--;
+            Console.Clear();
+            Console.WriteLine($"{plante.Nom} a été plantée dans le terrain {typeTerrain}.");
+        }
+
         else
         {
-            Console.WriteLine("L'endive est déjà au stade final !");
+            Console.WriteLine($"La zone {typeTerrain} est pleine. Impossible de planter {plante.Nom}.");
         }
-
-        AfficherPlante();
     }
 
-    public void AfficherPlante()
+    public void Arroser(Plateau plateau, string typeTerrain)
     {
-        switch (StadeCroissance)
+        foreach (var terrain in plateau.Terrains)
         {
-            case 1:
-                Console.WriteLine("   /\\   ");
-                break;
-            case 2:
-                Console.WriteLine("   /\\   ");
-                Console.WriteLine("  |   |  ");
-                break;
-            case 3:
-                Console.WriteLine("   /\\   ");
-                Console.WriteLine("  |   |  ");
-                Console.WriteLine("  |   |  ");
-                break;
-            case 4:
-                Console.WriteLine("   /\\   ");
-                Console.WriteLine("  |   |  ");
-                Console.WriteLine("  |   |  ");
-                Console.WriteLine("  |___|  ");
-                break;
-            case 5:
-                Console.WriteLine("   /\\   ");
-                Console.WriteLine("  |   |  ");
-                Console.WriteLine("  |   |  ");
-                Console.WriteLine("  |___|  ");
-                break;
-            default:
-                Console.WriteLine("Erreur : Stade inconnu");
-                break;
+            if (terrain.TypeTerrain==typeTerrain)
+            {
+                for (int i=0; i<terrain.Cases.GetLength(0); i++)
+                {
+                    for (int j=0; j<terrain.Cases.GetLength(1); j++)
+                    {
+                        // Si la case contient une plante, on lui ajoute de l'eau
+                        var plante = terrain.Cases[i,j];
+                        if (plante!=null)
+                        {
+                            plante.NiveauEau = Math.Min(plante.NiveauEau+10, 100); // Limite l'eau à 100
+                            Console.WriteLine($"La plante {plante.Nom} a été arrosée. Niveau d'eau : {plante.NiveauEau}/100");
+                            NbActionsPossibles--;
+                        }
+                    }
+                }
+            }
         }
     }
+
+
+    public void Recolter(Plateau plateau)
+    {
+        Console.WriteLine("Voici les plantes que tu peux récolter :");
+        List<Plante> plantesMures = new List<Plante>();
+
+        int index = 1;
+        foreach (var plante in PlantesSurJardin)
+        {
+            if (plante is Cerise c && c.StadeCroissance==5 || plante is Endive e && e.StadeCroissance==5 || plante is Rose r && r.StadeCroissance==5)
+            {
+                Console.WriteLine($"{index}. {plante.Nom}");
+                plantesMures.Add(plante);
+                index++;
+            }
+        }
+
+        if (plantesMures.Count==0)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Aucune plante n'est prête à être récoltée !");
+            Console.ForegroundColor = ConsoleColor.White;
+            return;
+        }
+
+        Console.WriteLine("Choisis la plante à récolter (numéro) :");
+        int choix = Convert.ToInt32(Console.ReadLine()!);
+
+        if (choix<1 || choix>plantesMures.Count)
+        {
+            Console.WriteLine("Numéro invalide !");
+            return;
+        }
+
+        Plante planteARetirer = plantesMures[choix - 1];
+        
+        // Retirer la plante du plateau
+        foreach (var terrain in plateau.Terrains)
+        {
+            for (int i=0; i<terrain.Cases.GetLength(0); i++)
+            {
+                for (int j=0; j<terrain.Cases.GetLength(1); j++)
+                {
+                    if (terrain.Cases[i,j]==planteARetirer)
+                    {
+                        terrain.Cases[i, j] = null;
+                        Console.Clear();
+                        Console.WriteLine($"{planteARetirer.Nom} a été récoltée !");
+                        PlantesSurJardin.Remove(planteARetirer);
+                        InventaireRecoltes.Add(planteARetirer.Nom);
+                        NbActionsPossibles--;
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    public void AfficherInventaireRecoltes()
+    {
+        Console.WriteLine("Inventaire des récoltes :");
+
+        if (InventaireRecoltes.Count==0)
+        {
+            Console.WriteLine("Tu n'as encore rien récolté !");
+        }
+
+        else
+        {
+            foreach (var nom in InventaireRecoltes)
+            {
+                Console.WriteLine($"- {nom}");
+            }
+            NbActionsPossibles--;
+        }
+    }
+
 }
