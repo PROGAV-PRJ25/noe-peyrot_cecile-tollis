@@ -17,6 +17,9 @@ public class Joueur
 
     public void Semer(Plateau plateau, Plante plante)
     {
+        Console.BackgroundColor = ConsoleColor.Magenta;
+        Console.WriteLine($" --- Pour information, le terrain préféré de {plante.Nom} est {plante.TerrainPrefere}");
+        Console.BackgroundColor = ConsoleColor.White;
         if (NbActionsPossibles==0)
         {
             Console.WriteLine("Tu n'as plus d'actions pour ce tour !");
