@@ -161,6 +161,11 @@ public class Simulation
                         }
                     }
                 }
+                foreach (var plante in joueur1.PlantesSurJardin)
+                {
+                    plante.VerifierConditions(plante);
+                    plante.NiveauEau = plante.NiveauEau-10;
+                }
                 Console.Clear();
                 semaineActuelle++;
             }
