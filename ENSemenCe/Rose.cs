@@ -4,7 +4,7 @@ public class Rose : Plante
     
     public Rose(string nom, string symbole) : base(nom, symbole)
     {
-        TerrainPrefere = "Terre"; 
+        TerrainPrefere = "terre"; 
     }
 
     public override void Pousser()
