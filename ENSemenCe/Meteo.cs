@@ -1,3 +1,4 @@
+
 public class Meteo
 {
     public List<string> ListeMeteo {get;set;}
@@ -41,16 +42,20 @@ public class Meteo
         switch (MeteoActuelle)
         {
             case "Petite pluie":
-                Console.WriteLine("Une petite pluie vient arroser les plantes !");
+                Console.WriteLine("Une petite pluie vient arroser le jardin !");
                 foreach (var plante in joueur.PlantesSurJardin)
                 {
-                    plante.NiveauEau += 1;
+                    plante.NiveauEau = Math.Min(plante.EtatSante+5,100);
                 }
                 break;
 
             case "Soleil":
-                Console.WriteLine("Un beau soleil est présent dans le ciel, les plantes poussent normalement.");
-                // Pas d'effet particulier
+                Console.WriteLine("Un beau soleil est présent dans le ciel.");
+                foreach (var plante in joueur.PlantesSurJardin)
+                {
+                    plante.EtatSante = Math.Min(plante.EtatSante+3,10); // Etat de santé ne doit pas dépasser 10
+                    plante.NiveauEau = plante.NiveauEau -10;
+                }
                 break;
 
             case "Nuageux":
@@ -68,7 +73,7 @@ public class Meteo
                 Console.WriteLine("Attention à la grosse pluie ! Certaines plantes risquent la noyade...");
                 foreach (var plante in joueur.PlantesSurJardin)
                 {
-                    plante.NiveauEau += 20;
+                    plante.NiveauEau = Math.Min(plante.EtatSante+20,100);
                 }
                 break;
 
@@ -87,6 +92,13 @@ public class Meteo
             case "Tornade":
                 Console.WriteLine("Une tornade a arraché des plantes !");
                 joueur.PlantesSurJardin.Clear(); // Effet extrême, à peaufiner.
+                foreach(var terrain in plateau.Terrains)
+                {
+                    foreach(var plante in joueur.PlantesSurJardin)
+                    {
+                        plante.SupprimerPlante(plante,terrain);
+                    }
+                }
                 break;
 
             case "Petit vent":
