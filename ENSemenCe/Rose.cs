@@ -7,25 +7,35 @@ public class Rose : Plante
         TerrainPrefere = "terre"; 
     }
 
-    public override void Pousser()
+    public override void Pousser(Plante plante)
     {
-        if (StadeCroissance < 8) // Il y a 8 stades (de 1 à 8, avec le final)
+        if (plante.EstVivante)
         {
-            StadeCroissance++;
-            Console.WriteLine($"La rose a poussé ! Elle est maintenant au stade {StadeCroissance}.");
-            Console.WriteLine("--- Aperçu --- ");
-            Console.WriteLine();
+            ProgressionCroissance += VitesseDeCroissance;
+
+            while (ProgressionCroissance >= 1 && StadeCroissance < 8)
+            {
+                StadeCroissance++;
+                ProgressionCroissance -= 1;
+            }
+
+        }
+    }
+
+    public override void AfficherPlante()
+    {
+        if (StadeCroissance >= 8)
+        {
+            Console.WriteLine("La rose est déjà au stade final !");
+            EstMure = true;
         }
         else
         {
-            Console.WriteLine("La rose est déjà au stade final !");
+            Console.WriteLine($"La rose est au stade {StadeCroissance} de croissance.");
+            Console.WriteLine("--- Aperçu --- ");
+            Console.WriteLine();
         }
-
-        AfficherPlante();
-    }
-
-    public void AfficherPlante()
-    {
+        
         switch (StadeCroissance)
         {
             case 1:
@@ -66,7 +76,6 @@ public class Rose : Plante
                 Console.WriteLine("  |");
                 break;
             default:
-                Console.WriteLine("Erreur : Stade inconnu");
                 break;
         }
     }
