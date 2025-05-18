@@ -8,6 +8,8 @@ public abstract class Plante
     public bool EstMure {get;set;}
     public bool EstMalade {get;set;}
     public int StadeCroissance { get; set; } = 0; // Commence au stade 0
+    public double VitesseDeCroissance { get; set; } = 1.0;
+    public double ProgressionCroissance { get; set; } = 0.0;
     public string TerrainPrefere { get; set; } = "Inconnu "; // required : oblige les classes dérivées à l’initialiser
     public Terrain? TerrainActuel {get;set;} = null;
 
@@ -22,9 +24,8 @@ public abstract class Plante
         EstMalade = false;
     }
 
-    public void AfficherDonnees(Plante plante)
+    public void AfficherDonnees(Plante plante, Joueur joueur)
     {
-        VerifierConditions(plante);
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine($"--- {plante.Nom} --- ");
         Console.ForegroundColor = ConsoleColor.White;
@@ -42,62 +43,80 @@ public abstract class Plante
             Console.Write("         --> La plante n'est pas en bonne santé ! "); 
             Console.ForegroundColor = ConsoleColor.White;
         }
+        if (plante.TerrainPrefere != plante.TerrainActuel!.TypeTerrain)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Oh non {plante.Nom} n'est pas sur son terrain préféré qui est {plante.TerrainPrefere} !");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
         Console.WriteLine();
-        plante.Pousser();
     }
 
-    public abstract void Pousser();
+    public abstract void Pousser(Plante plante);
+    public abstract void AfficherPlante();
 
-    public void VerifierConditions(Plante plante)
+    public void VerifierConditions(Plante plante, Joueur joueur)
     {
         int nbConditionsRespectees = 3;
-        if(plante.NiveauEau < 50)
+        if (plante.NiveauEau < 50)
         {
-            nbConditionsRespectees --;
-            plante.EtatSante -=2;
+            nbConditionsRespectees--;
+            plante.EtatSante -= 2;
         }
-        if(plante.NiveauEau<70 && plante.NiveauEau>50)
+        if (plante.NiveauEau >= 50 && plante.NiveauEau <= 70)
         {
-            plante.EtatSante -=1;
+            plante.EtatSante -= 1;
+            Console.WriteLine("coucou"); // A SUPPRIMER
         }
 
-        if(plante.TerrainPrefere != plante.TerrainActuel!.TypeTerrain)
+        if (plante.TerrainPrefere != plante.TerrainActuel!.TypeTerrain)
         {
-            Console.BackgroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"Oh non {plante.Nom} n'est pas sur son terrain préféré qui est {plante.TerrainPrefere} !");
-            Console.BackgroundColor = ConsoleColor.White;
-            nbConditionsRespectees --;
-            plante.EtatSante -=1;
+            Console.ForegroundColor = ConsoleColor.White;
+            nbConditionsRespectees--;
+            plante.EtatSante -= 1;
+            Console.WriteLine("blabla"); //A SUPPRIMER 
         }
 
-        if(plante.EstMalade)
+        if (plante.EstMalade)
         {
-            nbConditionsRespectees --;
-            plante.EtatSante -=3;
+            nbConditionsRespectees--;
+            plante.EtatSante -= 3;
+            Console.WriteLine("malade"); //A SUPPRIMER 
         }
 
-        if(nbConditionsRespectees <=1)
+        if (nbConditionsRespectees <= 1)
         {
-            plante.EtatSante =0;
+            plante.EtatSante = 0;
         }
 
-        if(plante.EtatSante <=0)
+        if (plante.EtatSante <= 0)
         {
             plante.EstVivante = false;
-            SupprimerPlante(plante, plante.TerrainActuel!);
+            SupprimerPlante(plante, plante.TerrainActuel!, joueur);
+        }
+
+        if (plante.EtatSante <= 5)
+        {
+            plante.ProgressionCroissance = 0.2;
+            Console.WriteLine($"{plante.EtatSante} test"); // A SUPPRIMER 
+            Console.WriteLine($"{plante.ProgressionCroissance} test"); // A SUPPRIMER 
         }
     }
 
-    public void SupprimerPlante(Plante plante, Terrain terrain)
+    public void SupprimerPlante(Plante plante, Terrain terrain, Joueur joueur)
     {
         for (int i=0; i<terrain.Cases.GetLength(0); i++)
         {
             for (int j=0; j<terrain.Cases.GetLength(1); j++)
             {
-                if (terrain.Cases[i,j] == plante)
+                if (terrain.Cases[i, j] == plante)
                 {
-                    terrain.Cases[i,j] = null;
-
+                    terrain.Cases[i, j] = null;
+                    joueur.PlantesSurJardin.Remove(plante);
+                    Console.WriteLine($"\n {plante.Nom} ne se trouve plus sur le jardin");
                 }   
             }
         }
