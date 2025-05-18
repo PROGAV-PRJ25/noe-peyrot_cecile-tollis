@@ -7,25 +7,36 @@ public class Endive : Plante
         TerrainPrefere = "terre"; 
     }
 
-    public override void Pousser()
+    public override void Pousser(Plante plante)
     {
-        if (StadeCroissance < 5) // Il y a 5 stades (de 1 à 5)
+        if (plante.EstVivante)
         {
-            StadeCroissance++;
-            Console.WriteLine($"L'endive a poussé ! Elle est maintenant au stade {StadeCroissance}.");
-            Console.WriteLine("--- Aperçu --- ");
-            Console.WriteLine();
+            ProgressionCroissance += VitesseDeCroissance;
+
+            while (ProgressionCroissance >= 1 && StadeCroissance < 5)
+            {
+                StadeCroissance++;
+                ProgressionCroissance -= 1;
+            }
+
+        }
+    }
+
+
+    public override void AfficherPlante()
+    {
+        if (StadeCroissance >= 5)
+        {
+            Console.WriteLine("L'endive est déjà au stade final !");
+            EstMure = true;
         }
         else
         {
-            Console.WriteLine("L'endive est déjà au stade final !");
+            Console.WriteLine($"L'endive est au stade {StadeCroissance} de croissance.");
+            Console.WriteLine("--- Aperçu --- ");
+            Console.WriteLine();
         }
-
-        AfficherPlante();
-    }
-
-    public void AfficherPlante()
-    {
+        
         switch (StadeCroissance)
         {
             case 1:
@@ -53,7 +64,6 @@ public class Endive : Plante
                 Console.WriteLine("  |___|  ");
                 break;
             default:
-                Console.WriteLine("Erreur : Stade inconnu");
                 break;
         }
     }
