@@ -18,8 +18,8 @@ public class Joueur
     public void Semer(Plateau plateau, Plante plante)
     {
         Console.BackgroundColor = ConsoleColor.Magenta;
-        Console.WriteLine($" --- Pour information, le terrain préféré de {plante.Nom} est {plante.TerrainPrefere}");
-        Console.BackgroundColor = ConsoleColor.White;
+        Console.WriteLine($" --- Pour information, le terrain préféré de {plante.Nom} est {plante.TerrainPrefere} ---");
+        Console.BackgroundColor = ConsoleColor.Black;
         if (NbActionsPossibles==0)
         {
             Console.WriteLine("Tu n'as plus d'actions pour ce tour !");
@@ -89,24 +89,25 @@ public class Joueur
     {
         foreach (var terrain in plateau.Terrains)
         {
-            if (terrain.TypeTerrain==typeTerrain)
+            if (terrain.TypeTerrain == typeTerrain)
             {
-                for (int i=0; i<terrain.Cases.GetLength(0); i++)
+                for (int i = 0; i < terrain.Cases.GetLength(0); i++)
                 {
-                    for (int j=0; j<terrain.Cases.GetLength(1); j++)
+                    for (int j = 0; j < terrain.Cases.GetLength(1); j++)
                     {
                         // Si la case contient une plante, on lui ajoute de l'eau
-                        var plante = terrain.Cases[i,j];
-                        if (plante!=null)
+                        var plante = terrain.Cases[i, j];
+                        if (plante != null)
                         {
-                            plante.NiveauEau = Math.Min(plante.NiveauEau+10, 100); // Limite l'eau à 100
+                            plante.NiveauEau = Math.Min(plante.NiveauEau + 20, 100); // Limite l'eau à 100
                             Console.WriteLine($"La plante {plante.Nom} a été arrosée. Niveau d'eau : {plante.NiveauEau}/100");
-                            NbActionsPossibles--;
+
                         }
                     }
                 }
             }
         }
+        NbActionsPossibles--;
     }
 
 
@@ -118,7 +119,7 @@ public class Joueur
         int index = 1;
         foreach (var plante in PlantesSurJardin)
         {
-            if (plante is Cerise c && c.StadeCroissance==5 || plante is Endive e && e.StadeCroissance==5 || plante is Rose r && r.StadeCroissance==5)
+            if (plante.EstMure)
             {
                 Console.WriteLine($"{index}. {plante.Nom}");
                 plantesMures.Add(plante);
@@ -169,7 +170,8 @@ public class Joueur
 
     public void AfficherInventaireRecoltes()
     {
-        Console.WriteLine("Inventaire des récoltes :");
+        Console.WriteLine("Afficher l'inventaire ne diminue pas le nombre d'action");
+        Console.WriteLine("\n Inventaire des récoltes :");
 
         if (InventaireRecoltes.Count==0)
         {
@@ -182,7 +184,6 @@ public class Joueur
             {
                 Console.WriteLine($"- {nom}");
             }
-            NbActionsPossibles--;
         }
     }
 
