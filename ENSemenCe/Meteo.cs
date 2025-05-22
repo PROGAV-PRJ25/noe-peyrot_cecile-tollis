@@ -1,4 +1,3 @@
-
 public class Meteo
 {
     public List<string> ListeMeteo { get; set; }
@@ -46,7 +45,7 @@ public class Meteo
                 foreach (var plante in joueur.PlantesSurJardin)
                 {
                     plante.NiveauEau = Math.Min(plante.NiveauEau + 5, 100);
-                    plante.ProgressionCroissance = 1;
+                    plante.VitesseDeCroissance = 1.0; // Croissance normale
                 }
                 break;
 
@@ -56,7 +55,7 @@ public class Meteo
                 {
                     plante.EtatSante = Math.Min(plante.EtatSante + 3, 10); // Etat de santé ne doit pas dépasser 10
                     plante.NiveauEau = plante.NiveauEau - 10;
-                    plante.ProgressionCroissance = 1.5;
+                    plante.VitesseDeCroissance = 1.5; // Croissance rapide
                 }
                 break;
 
@@ -66,7 +65,7 @@ public class Meteo
                 {
                     if (plante.StadeCroissance > 0)
                     {
-                        plante.ProgressionCroissance = 0.5;
+                        plante.VitesseDeCroissance = 0.5; // Croissance ralentie
                     }
                 }
                 break;
@@ -76,6 +75,7 @@ public class Meteo
                 foreach (var plante in joueur.PlantesSurJardin)
                 {
                     plante.NiveauEau = Math.Min(plante.NiveauEau + 20, 100);
+                    plante.VitesseDeCroissance = 0.8; // Croissance un peu ralentie
                 }
                 break;
 
@@ -87,16 +87,26 @@ public class Meteo
                     if (plante.NiveauEau < 0)
                     {
                         plante.NiveauEau = 0; // On évite un niveau d'eau négatif comme cela.
+                        plante.VitesseDeCroissance = 0.3; // Croissance très lente
                     }
                 }
                 break;
 
             case "Tornade":
+                foreach (var plante in joueur.PlantesSurJardin)
+                {
+                    plante.VitesseDeCroissance = 0.5; // perturbation
+                }
                 TornadeImpact(joueur); // Chaque plante a une chance sur 3 d'être enlevé 
                 break;
 
 
             case "Petit vent":
+                // Échange des plantes, pas d’effet direct sur la croissance
+                foreach (var plante in joueur.PlantesSurJardin)
+                {
+                    plante.VitesseDeCroissance = 1.0;
+                }
                 if (joueur.PlantesSurJardin.Count >= 2)
                 {
                     Random rnd = new Random();
@@ -220,14 +230,5 @@ public class Meteo
             Console.WriteLine("Aucune plante n’a été arrachée cette fois !");
         }
     }
-
-    /*
-    public bool EstMeteoDangereuse()
-    {
-        return ListeMeteoDangereuse.Contains(MeteoActuelle);
-    }
-    */
-    // Il faudrait qu'on fasse une fonction qui détermine quelle météo est considérée comme dangereuse et donc activant le mode urgence.
 }
-
 
