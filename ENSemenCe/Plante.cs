@@ -64,10 +64,9 @@ public abstract class Plante
             nbConditionsRespectees--;
             plante.EtatSante -= 2;
         }
-        if (plante.NiveauEau >= 50 && plante.NiveauEau <= 70)
+        else if (plante.NiveauEau >= 50 && plante.NiveauEau <= 70)
         {
             plante.EtatSante -= 1;
-            Console.WriteLine("coucou"); // A SUPPRIMER
         }
 
         if (plante.TerrainPrefere != plante.TerrainActuel!.TypeTerrain)
@@ -77,14 +76,12 @@ public abstract class Plante
             Console.ForegroundColor = ConsoleColor.White;
             nbConditionsRespectees--;
             plante.EtatSante -= 1;
-            Console.WriteLine("blabla"); //A SUPPRIMER 
         }
 
         if (plante.EstMalade)
         {
             nbConditionsRespectees--;
             plante.EtatSante -= 3;
-            Console.WriteLine("malade"); //A SUPPRIMER 
         }
 
         if (nbConditionsRespectees <= 1)
@@ -101,8 +98,6 @@ public abstract class Plante
         if (plante.EtatSante <= 5)
         {
             plante.ProgressionCroissance = 0.2;
-            Console.WriteLine($"{plante.EtatSante} test"); // A SUPPRIMER 
-            Console.WriteLine($"{plante.ProgressionCroissance} test"); // A SUPPRIMER 
         }
     }
 
