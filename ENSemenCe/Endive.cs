@@ -19,9 +19,12 @@ public class Endive : Plante
                 ProgressionCroissance -= 1;
             }
 
+            if (StadeCroissance >= 5)
+            {
+                EstMure = true;
+            }
         }
     }
-
 
     public override void AfficherPlante()
     {
