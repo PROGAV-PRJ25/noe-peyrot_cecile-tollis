@@ -8,6 +8,9 @@ public class Simulation
     private Rose rose2;
     private Cerise cerise1;
     private Endive endive1;
+    private Ble ble1;
+    private Lotus lotus1;
+    private Tournesol tournesol1;
     private Webcam webcam;
     private Meteo meteo;
     private bool modeUrgence = false; // Ce booléen détermine si le mode urgence se lance ou non (il est donc initialisé à false pour un début normal).
@@ -22,10 +25,12 @@ public class Simulation
         rose2 = new Rose("Rose", "R"); 
         cerise1 = new Cerise("Cerise", "C"); // On crée une cerise.
         endive1 = new Endive("Endive", "E"); // On crée une endive.
+        ble1 = new Ble("Blé", "B"); // On crée une pousse de blé.
+        lotus1 = new Lotus("Lotus", "L"); // On crée un lotus.
+        tournesol1 = new Tournesol("Tournesol", "T"); // On crée un tournesol.
 
         webcam = new Webcam();
         meteo = new Meteo();
-
     }
 
     public void LancerSimulation()
@@ -234,13 +239,16 @@ public class Simulation
         // On crée un joueur. 
         Console.WriteLine("Comment t'appelles-tu jeune jardinier ?");
         string nom = Convert.ToString(Console.ReadLine()!)!;
-        joueur1 = new Joueur(nom); 
+        joueur1 = new Joueur(nom);
 
-        // On ajoute deux roses dans l'inventaire de semis du joueur.
+        // On remplit son inventaire avec les différentes plantes :
         joueur1.InventaireSemis.Add(rose1);
         joueur1.InventaireSemis.Add(rose2);
         joueur1.InventaireSemis.Add(cerise1);
         joueur1.InventaireSemis.Add(endive1);
+        joueur1.InventaireSemis.Add(ble1);
+        joueur1.InventaireSemis.Add(lotus1);
+        joueur1.InventaireSemis.Add(tournesol1);
     }
 
     public string typeIntrus = "";
