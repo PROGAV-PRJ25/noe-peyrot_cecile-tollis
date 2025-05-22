@@ -14,6 +14,7 @@ public class Simulation
     private Champignon champignon1;
     private Pissenlit pissenlit1;
     private Tulipe tulipe1;
+    private Sapin sapin1;
     private Webcam webcam;
     private Meteo meteo;
     private bool modeUrgence = false; // Ce booléen détermine si le mode urgence se lance ou non (il est donc initialisé à false pour un début normal).
@@ -34,6 +35,7 @@ public class Simulation
         champignon1 = new Champignon("Champignon", "Ch"); // On crée un champignon.
         pissenlit1 = new Pissenlit("Pissenlit", "P"); // On crée un pissenlit.
         tulipe1 = new Tulipe("Tulipe", "Tu"); // On crée une tulipe.
+        sapin1 = new Sapin("Sapin", "S"); // On crée un sapin.
 
         webcam = new Webcam();
         meteo = new Meteo();
@@ -258,6 +260,7 @@ public class Simulation
         joueur1.InventaireSemis.Add(champignon1);
         joueur1.InventaireSemis.Add(pissenlit1);
         joueur1.InventaireSemis.Add(tulipe1);
+        joueur1.InventaireSemis.Add(sapin1);
     }
 
     public string typeIntrus = "";
