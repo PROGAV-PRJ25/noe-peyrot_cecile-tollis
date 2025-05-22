@@ -11,6 +11,7 @@ public class Simulation
     private Ble ble1;
     private Lotus lotus1;
     private Tournesol tournesol1;
+    private Champignon champignon1;
     private Webcam webcam;
     private Meteo meteo;
     private bool modeUrgence = false; // Ce booléen détermine si le mode urgence se lance ou non (il est donc initialisé à false pour un début normal).
@@ -28,6 +29,7 @@ public class Simulation
         ble1 = new Ble("Blé", "B"); // On crée une pousse de blé.
         lotus1 = new Lotus("Lotus", "L"); // On crée un lotus.
         tournesol1 = new Tournesol("Tournesol", "T"); // On crée un tournesol.
+        champignon1 = new Champignon("Champignon", "Ch"); // On crée un champignon.
 
         webcam = new Webcam();
         meteo = new Meteo();
@@ -249,6 +251,7 @@ public class Simulation
         joueur1.InventaireSemis.Add(ble1);
         joueur1.InventaireSemis.Add(lotus1);
         joueur1.InventaireSemis.Add(tournesol1);
+        joueur1.InventaireSemis.Add(champignon1);
     }
 
     public string typeIntrus = "";
