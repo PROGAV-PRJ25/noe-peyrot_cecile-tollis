@@ -18,15 +18,17 @@ public class Simulation
     private Webcam webcam;
     private Meteo meteo;
     private bool modeUrgence = false; // Ce booléen détermine si le mode urgence se lance ou non (il est donc initialisé à false pour un début normal).
+    private string typeIntrus = ""; // Pour savoir quel intrus est apparu : "Rat" ou "Indominus"
+    private Intrus? intrusActuel = null; // L'intrus actif sur le plateau (Rat ou Indominus)
 
     public Simulation(int nbTours)
     {
         this.nbTours = nbTours;
         semaineActuelle = 1;
-        plateau = new Plateau(9,6); // On initialise un plateau de 9 lignes et 6 colonnes.
-        
+        plateau = new Plateau(9, 6); // On initialise un plateau de 9 lignes et 6 colonnes.
+
         rose1 = new Rose("Rose", "R"); // On crée deux roses : rose1 et rose2.
-        rose2 = new Rose("Rose", "R"); 
+        rose2 = new Rose("Rose", "R");
         cerise1 = new Cerise("Cerise", "C"); // On crée une cerise.
         endive1 = new Endive("Endive", "E"); // On crée une endive.
         ble1 = new Ble("Blé", "B"); // On crée une pousse de blé.
@@ -51,7 +53,7 @@ public class Simulation
         InitialiserPartie();
         Console.WriteLine($"Bonjour {joueur1!.Nom} ! Et bienvenue dans ENSemenCe !!");
         Console.WriteLine($"Tu as {nbTours} semaines pour obtenir le plus beau des jardins !");
-        
+
         Console.ForegroundColor = ConsoleColor.Red;
         Thread.Sleep(2000);
         Console.WriteLine("⚠️  Attention, tu ne peux effectuer que 3 actions chaque semaine ! ⚠️  Bonne chance !");
@@ -59,8 +61,8 @@ public class Simulation
         Console.ForegroundColor = ConsoleColor.White;
         Console.Clear();
 
-        while(semaineActuelle <= nbTours)
-        {   
+        while (semaineActuelle <= nbTours)
+        {
             // Au début de chaque tour, on teste si le mode urgence doit se lancer ou si la partie continue normalement.
             Random r = new Random();
             TesterModeUrgence(r);
@@ -73,7 +75,7 @@ public class Simulation
 
             if (TesterModeUrgence(r) == true)
             {
-                // ActiverModeUrgence();
+                ActiverModeUrgence();
             }
 
             else // Si le mode urgence n'est pas activé, la partie se déroule classiquement.
@@ -191,8 +193,8 @@ public class Simulation
                 Console.Clear();
                 semaineActuelle++;
             }
-        }   
-                
+        }
+
     }
 
     public void AfficherEffet()
@@ -263,90 +265,59 @@ public class Simulation
         joueur1.InventaireSemis.Add(sapin1);
     }
 
-    public string typeIntrus = "";
-    public bool TesterModeUrgence(Random r)
+    public void ActiverModeUrgence()
     {
-        int probaUrgence = r.Next(0,101); // On détermine un nombre entre 0 et 100 pour savoir si on lance le mode urgence ou pas.
-
-        if(probaUrgence<85) // Il y a 85% de chances de continuer le jeu normalement.
-        {
-            modeUrgence = false;
-        }
-
-        else if(probaUrgence>=85 && probaUrgence<95) // Il y a 10% de chances que le mode urgence se lance à cause d'un rat.
-        {
-            modeUrgence = true;
-            Rat rat1 = new Rat("Rat","R");
-            typeIntrus = "Rat";
-
-        }
-
-        else // Il y a 5% de chances que le mode urgence se lance à cause de l'arrivée d'un Indominus.
-        {
-            modeUrgence = true;
-            Indominus indominus1 = new Indominus("Indominus","I");
-            typeIntrus = "Indominus";
-        }
-
-        return modeUrgence;
-    }
-    
-    public bool TesterApparitionRat()
-    {
-        Random r = new Random();
-        int chance = r.Next(0, 100); // 0 à 99
-        return chance < 99; // 20% de chance
-    }
-
-
-    public void ActiverModeUrgence(Plateau plateau)
-    {
-        ConsoleColor originalBackground = Console.BackgroundColor; // On sauvegarde le fond de base avant de le changer.
+        ConsoleColor originalBackground = Console.BackgroundColor;
         Console.BackgroundColor = ConsoleColor.Red;
 
-        Console.WriteLine($"Attention, un intrus vient de s'introduire dans ton jardin !");
+        Console.Clear();
+        Console.WriteLine($"🚨  Attention, un intrus vient de s'introduire dans ton jardin !");
 
         if (typeIntrus == "Rat")
         {
-            Console.WriteLine("Oh non, il s'agit d'un méchant rat !");
+            Console.WriteLine("🐭  Oh non, il s'agit d'un méchant rat !");
+            intrusActuel = new Rat("Rat", "R");
         }
-
         else
         {
-            Console.WriteLine("Au secours, un terrible Indominus est là !!");
+            Console.WriteLine("🦖  Au secours, un terrible Indominus est là !!");
+            intrusActuel = new Indominus("Indominus", "I");
         }
 
-        /*
-        Code à avancer : Il faut récupérer la case du coin supérieur droit pour y placer le rat ou l'Indominus, c'est de là que les intrus vont arriver pour le moment.
-        foreach(var terrain in plateau.Terrains)
+        Console.WriteLine($"\nIntrus détecté : {intrusActuel.Symbole} - {intrusActuel.Nom}");
+
+        Thread.Sleep(3000);
+        Console.BackgroundColor = originalBackground;
+        Console.Clear();
+    }
+
+
+    public bool TesterModeUrgence(Random r)
+    {
+        int probaUrgence = r.Next(0, 101);
+        if (probaUrgence < 85)
         {
-            for (int i=0; i<terrain.Cases.GetLength(0); i++)
-            {
-                for (int j=0; j<terrain.Cases.GetLength(1); j++)
-                {
-                    if (terrain.Cases[i,j] == null)
-                    {
-                        Console.Write(" . "); // Case vide.
-                    }
-                        
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                        Console.Write($" {terrain.Cases[i,j]!.Symbole} "); // Case occupée par une plante (symbole de la plante) - ! évite la valeur nulle
-                        Console.ForegroundColor = ConsoleColor.White;
-                    }       
-                }
-
-                Console.WriteLine();
-            }
+            modeUrgence = false;
+            typeIntrus = "";
         }
-        */
+        else if (probaUrgence < 95)
+        {
+            modeUrgence = true;
+            typeIntrus = "Rat";
+        }
+        else
+        {
+            modeUrgence = true;
+            typeIntrus = "Indominus";
+        }
+        return modeUrgence;
+    }
 
-        plateau.AfficherPlateau();
-        // Faire en sorte d'afficher l'intrus.
-
-        Console.BackgroundColor = originalBackground; // On rétablit le fond une fois que l'urgence est terminée.
-
+    public bool TesterApparitionRat()
+    {
+        Random r = new Random();
+        int chance = r.Next(0, 100);
+        return chance < 20;
     }
 
 }
