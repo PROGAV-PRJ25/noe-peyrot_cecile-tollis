@@ -19,8 +19,13 @@ public class Rose : Plante
                 ProgressionCroissance -= 1;
             }
 
+            if (StadeCroissance >= 8)
+            {
+                EstMure = true;
+            }
         }
     }
+
 
     public override void AfficherPlante()
     {
