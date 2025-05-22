@@ -13,14 +13,21 @@ public class Cerise : Plante
         {
             ProgressionCroissance += VitesseDeCroissance;
 
+            // On fait progresser les stades en fonction de la progression cumulée
             while (ProgressionCroissance >= 1 && StadeCroissance < 5)
             {
                 StadeCroissance++;
                 ProgressionCroissance -= 1;
             }
 
+            // Une fois le stade max atteint, la plante devient mûre
+            if (StadeCroissance >= 5)
+            {
+                EstMure = true;
+            }
         }
     }
+
 
 
     public override void AfficherPlante()
