@@ -200,6 +200,7 @@ public class Meteo
 
     public void TornadeImpact(Joueur joueur)
     {
+        Console.ForegroundColor = ConsoleColor.DarkRed;
         Console.WriteLine("Une tornade passe... Certaines plantes pourraient être arrachées !");
 
         Random r = new Random();
@@ -229,6 +230,8 @@ public class Meteo
         {
             Console.WriteLine("Aucune plante n’a été arrachée cette fois !");
         }
+        Console.ForegroundColor = ConsoleColor.White;
+
     }
 }
 
