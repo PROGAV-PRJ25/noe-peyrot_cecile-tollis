@@ -14,6 +14,7 @@ public class Simulation
     private Champignon champignon1;
     private Pissenlit pissenlit1;
     private Tulipe tulipe1;
+    private Tulipe tulipe2;
     private Sapin sapin1;
     private Webcam webcam;
     private Meteo meteo;
@@ -39,6 +40,7 @@ public class Simulation
         champignon1 = new Champignon("Champignon", "Ch"); // On crée un champignon.
         pissenlit1 = new Pissenlit("Pissenlit", "P"); // On crée un pissenlit.
         tulipe1 = new Tulipe("Tulipe", "Tu"); // On crée une tulipe.
+        tulipe2 = new Tulipe("Tulipe", "Tu"); // On crée une tulipe.
         sapin1 = new Sapin("Sapin", "S"); // On crée un sapin.
         rat = new Rat("Rat", "R");
         indominus = new Indominus("Indominus", "I");
@@ -63,10 +65,12 @@ public class Simulation
         Thread.Sleep(2000);
         Console.WriteLine("⚠️  Attention, tu ne peux effectuer que 3 actions chaque semaine ! ⚠️  Bonne chance !");
         Thread.Sleep(4000);
+        Console.WriteLine("⚠️  La partie s'arrêtera lorsque tu attendras le nombre maximal de tour ou lorsque tu n'auras plus de plantes dans ton jardin et dans ton inventaire !");
+        Thread.Sleep(5000);
         Console.ForegroundColor = ConsoleColor.White;
         Console.Clear();
 
-        while (semaineActuelle <= nbTours)
+        while (semaineActuelle <= nbTours && (joueur1.InventaireSemis.Count != 0 || joueur1.PlantesSurJardin.Count != 0))
         {
             // Au début de chaque tour, on teste si le mode urgence doit se lancer ou si la partie continue normalement.
             Random r = new Random();
@@ -81,8 +85,8 @@ public class Simulation
                 }
             }
 
-            
-           
+
+
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine($"Semaine {semaineActuelle}"); // On annonce le numéro de la semaine.
             Console.ForegroundColor = ConsoleColor.White;
@@ -187,16 +191,21 @@ public class Simulation
                     }
                 }
             }
-            foreach (var plante in joueur1.PlantesSurJardin)
+            foreach (var plante in joueur1.PlantesSurJardin.ToList())
             {
+                plante.NiveauEau = plante.NiveauEau - 10;
                 plante.VerifierConditions(plante, joueur1);
                 plante.Pousser(plante);
-                plante.NiveauEau = plante.NiveauEau - 10;
+
             }
             Console.Clear();
             semaineActuelle++;
         }
 
+        Console.WriteLine("C'est la fin de la partie !");
+        Thread.Sleep(1000);
+        AfficherFin();
+        
     }
 
     public void AfficherEffet()
@@ -246,6 +255,16 @@ public class Simulation
         Thread.Sleep(1500);
     }
 
+    public void AfficherFin()
+    {
+        Console.WriteLine(@" __  __               _ ");
+        Console.WriteLine(@"|  \/  | ___ _ __ ___(_)");
+        Console.WriteLine(@"| |\/| |/ _ \ '__/ __| |");
+        Console.WriteLine(@"| |  | |  __/ | | (__| |");
+        Console.WriteLine(@"|_|  |_|\___|_|  \___|_|");
+        Thread.Sleep(4000);
+    }
+
     public void InitialiserPartie()
     {
         // On crée un joueur. 
@@ -264,6 +283,7 @@ public class Simulation
         joueur1.InventaireSemis.Add(champignon1);
         joueur1.InventaireSemis.Add(pissenlit1);
         joueur1.InventaireSemis.Add(tulipe1);
+        joueur1.InventaireSemis.Add(tulipe2);
         joueur1.InventaireSemis.Add(sapin1);
     }
 
