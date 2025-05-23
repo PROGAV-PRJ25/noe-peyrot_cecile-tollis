@@ -1,2 +1,2 @@
-﻿Simulation s = new Simulation(10);
+Simulation s = new Simulation(30);
 s.LancerSimulation();
