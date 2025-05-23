@@ -1,6 +1,7 @@
 public class Plateau
 {
-    public Terrain[] Terrains {get;set;}
+    public Terrain[] Terrains { get; set; }
+
 
     public Plateau(int nbLignes, int nbColonnes)
     {
@@ -14,11 +15,20 @@ public class Plateau
 
     public void AfficherPlateau()
     {
-        foreach(var terrain in Terrains) // La variable terrain existe uniquement ici, on peut changer son nom si c'est trompeur.
+        foreach (var terrain in Terrains) // La variable terrain existe uniquement ici, on peut changer son nom si c'est trompeur.
         {
             Console.WriteLine($"Terrain {terrain.TypeTerrain}");
             terrain.AfficherTerrain();
             Console.WriteLine();
         }
     }
+    
+    public void FairePousserMauvaisesHerbes()
+    {
+        foreach (var terrain in Terrains)
+        {
+            terrain.FairePousserMauvaiseHerbe();
+        }
+    }
+
 }
