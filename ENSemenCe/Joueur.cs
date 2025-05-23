@@ -76,7 +76,7 @@ public class Joueur
             plante.TerrainActuel = terrainCible;
             NbActionsPossibles--;
             Console.Clear();
-            Console.WriteLine($"{plante.Nom} a été plantée dans le terrain {typeTerrain}.");
+            Console.WriteLine($"{plante.Nom} a été planté(e) dans le terrain {typeTerrain}.");
         }
 
         else
@@ -224,7 +224,7 @@ public class Joueur
 
     public void AfficherInventaireRecoltes()
     {
-        Console.WriteLine("Afficher l'inventaire ne diminue pas le nombre d'action");
+        Console.WriteLine("Afficher l'inventaire ne diminue pas le nombre d'actions");
         Console.WriteLine("\n Inventaire des récoltes :");
 
         if (InventaireRecoltes.Count == 0)
@@ -240,5 +240,4 @@ public class Joueur
             }
         }
     }
-
 }
