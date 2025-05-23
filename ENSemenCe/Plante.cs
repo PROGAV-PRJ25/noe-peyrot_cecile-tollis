@@ -40,7 +40,7 @@ public abstract class Plante
         if(plante.EtatSante <5)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("         --> La plante n'est pas en bonne santé ! "); 
+            Console.Write("         --> La plante n'est pas en bonne santé !\n "); 
             Console.ForegroundColor = ConsoleColor.White;
         }
         if (plante.TerrainPrefere != plante.TerrainActuel!.TypeTerrain)
@@ -78,13 +78,7 @@ public abstract class Plante
             plante.EtatSante -= 1;
         }
 
-        if (plante.EstMalade)
-        {
-            nbConditionsRespectees--;
-            plante.EtatSante -= 3;
-        }
-
-        if (nbConditionsRespectees <= 1)
+        if (nbConditionsRespectees <= 1) // Si moins de 50% des conditions de la plante sont respectées elle meurt
         {
             plante.EtatSante = 0;
         }
