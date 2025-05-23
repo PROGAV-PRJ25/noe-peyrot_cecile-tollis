@@ -94,8 +94,8 @@ public class Sapin : Plante
                 Console.WriteLine(" /*//|\\*\\\\");
                 Console.WriteLine(" ///*/|\\*\\*\\\\");
                 Console.WriteLine("/*///*|\\\\*\\\\*\\");
-                Console.WriteLine("       | |");
-                Console.WriteLine("       | |");
+                Console.WriteLine("      | |");
+                Console.WriteLine("      | |");
                 Console.WriteLine("     /___\\");
                 break;
             default:
