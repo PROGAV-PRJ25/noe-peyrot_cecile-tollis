@@ -7,16 +7,37 @@ public class Rat : Intrus
     
     public override void Agir(Plateau plateau, Joueur joueur)
     {
-        Console.Clear();
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("🐭 Un rat est apparu ! Appuyez sur ESPACE pour faire du bruit !!");
-        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("Un rat est apparu ! Appuyez sur ESPACE pour faire du bruit !!");
+        Console.ResetColor();
         Thread.Sleep(1500);
 
         Random rand = new Random();
 
-        // 1. Choisir un terrain au hasard
-        Terrain terrain = plateau.Terrains[rand.Next(plateau.Terrains.Length)];
+        // 1. Trouver un terrain avec au moins une plante
+        Terrain? terrain = null;
+        foreach (var t in plateau.Terrains)
+        {
+            for (int i = 0; i < t.Cases.GetLength(0); i++)
+            {
+                for (int j = 0; j < t.Cases.GetLength(1); j++)
+                {
+                    if (t.Cases[i, j] is Plante)
+                    {
+                        terrain = t;
+                        break;
+                    }
+                }
+                if (terrain != null) break;
+            }
+            if (terrain != null) break;
+        }
+
+        if (terrain == null)
+        {
+            Console.WriteLine("\nLe rat n’a trouvé aucune plante sur tous les terrains !");
+            Thread.Sleep(1500);
+            return;
+        }
 
         // 2. Trouver une ligne avec au moins une plante
         List<int> lignesAvecPlantes = new List<int>();
@@ -32,20 +53,13 @@ public class Rat : Intrus
             }
         }
 
-        if (lignesAvecPlantes.Count == 0)
-        {
-            Console.WriteLine("\n🐭 Le rat est reparti sans rien trouver.");
-            Thread.Sleep(1500);
-            return;
-        }
-
-        // Choisir une ligne au hasard parmi celles qui ont une plante
         int ligneChoisie = lignesAvecPlantes[rand.Next(lignesAvecPlantes.Count)];
 
         // 3. Déplacer le rat de droite à gauche sur cette ligne
         for (int col = terrain.Cases.GetLength(1) - 1; col >= 0; col--)
         {
             Console.Clear();
+            Console.BackgroundColor=ConsoleColor.Red;
             Console.WriteLine("Appuyez sur [ESPACE] pour chasser le rat !");
 
             for (int i = 0; i < terrain.Cases.GetLength(0); i++)
@@ -56,13 +70,13 @@ public class Rat : Intrus
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.Write(" 🐭 ");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ResetColor();
                     }
                     else if (terrain.Cases[i, j] != null)
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.BackgroundColor = ConsoleColor.Black;
                         Console.Write($" {terrain.Cases[i, j]!.Symbole} ");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ResetColor();
                     }
                     else
                     {
@@ -73,9 +87,8 @@ public class Rat : Intrus
             }
 
             // Attente + détection touche
-            int delay = 300; // ms
-            int step = 30;   // vérifie toutes les 30 ms
-            bool ratEffraye = false;
+            int delay = 300;
+            int step = 30;
 
             for (int t = 0; t < delay; t += step)
             {
@@ -85,25 +98,20 @@ public class Rat : Intrus
                     if (key.Key == ConsoleKey.Spacebar)
                     {
                         Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.WriteLine("\n🐭 Le joueur a effrayé le rat ! Il s’enfuit !");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("\nLe joueur a effrayé le rat ! Il s’enfuit !");
+                        Console.ResetColor();
                         Thread.Sleep(1500);
-                        ratEffraye = true;
-                        break;
+                        return;
                     }
                 }
                 Thread.Sleep(step);
             }
 
-            if (ratEffraye)
-                return;
-
-            // Le rat arrive sur une plante ?
             if (terrain.Cases[ligneChoisie, col] is Plante plante)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"\n🐭 Le rat a mangé une {plante.Nom} !");
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.ResetColor();
                 terrain.Cases[ligneChoisie, col] = null;
                 joueur.PlantesSurJardin.Remove(plante);
                 Thread.Sleep(2000);
@@ -111,9 +119,11 @@ public class Rat : Intrus
             }
         }
 
+        // Ce cas ne devrait plus arriver
         Console.WriteLine("\n🐭 Le rat est reparti sans rien trouver.");
         Thread.Sleep(1500);
     }
+
 
 
 
