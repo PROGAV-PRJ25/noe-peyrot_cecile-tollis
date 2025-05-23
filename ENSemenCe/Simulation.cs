@@ -65,7 +65,7 @@ public class Simulation
         Thread.Sleep(2000);
         Console.WriteLine("⚠️  Attention, tu ne peux effectuer que 3 actions chaque semaine ! ⚠️  Bonne chance !");
         Thread.Sleep(4000);
-        Console.WriteLine("⚠️  La partie s'arrêtera lorsque tu attendras le nombre maximal de tour ou lorsque tu n'auras plus de plantes dans ton jardin et dans ton inventaire !");
+        Console.WriteLine("⚠️  La partie s'arrêtera lorsque tu atteindras le nombre maximal de tours ou lorsque tu n'auras plus de plantes dans ton jardin et dans ton inventaire !");
         Thread.Sleep(5000);
         Console.ForegroundColor = ConsoleColor.White;
         Console.Clear();
@@ -116,7 +116,7 @@ public class Simulation
                 Console.WriteLine($"\nSemaine {semaineActuelle}"); // On annonce le numéro de la semaine.
                 Console.ForegroundColor = ConsoleColor.White;
 
-                Console.WriteLine($"{joueur1!.Nom}, il te reste {joueur1.NbActionsPossibles} actions maximum !"); // On rappelle le nombre d'actions. 
+                Console.WriteLine($"{joueur1!.Nom}, il te reste {joueur1.NbActionsPossibles} actions restantes !"); // On rappelle le nombre d'actions. 
                 Console.WriteLine("Choisis l'action que tu souhaites effectuer :");
                 Console.WriteLine("1. Semer ");
                 Console.WriteLine("2. Arroser");
@@ -353,9 +353,5 @@ public class Simulation
             typeIntrus = "Indominus";
         }
         return modeUrgence;
-    }
-    
-
-
-
+    }   
 }
