@@ -63,5 +63,4 @@ public abstract class Terrain
             MauvaisesHerbes[x, y] = true;
         }
     }
-
 }
