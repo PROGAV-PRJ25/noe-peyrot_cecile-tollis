@@ -78,7 +78,7 @@ public class Indominus : Intrus
                 }
 
                 // Tentative de lancer de grenade
-                int delay = 300;
+                int delay = 250;
                 int step = 30;
 
                 for (int t = 0; t < delay; t += step)
@@ -89,13 +89,13 @@ public class Indominus : Intrus
                         if (key.Key == ConsoleKey.G)
                         {
 
-                            if (rand.Next(3) == 0) // 1 chance sur 4
+                            if (rand.Next(3) == 0) // 1 chance sur 3
                             {
                                 Console.Clear();
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("<<< BBBBOOOOOOOOOOOOMMMMMMMMM >>>");
                                 Thread.Sleep(1500);
-                                Console.WriteLine("\nGrenade réussie ! L'Indominus est éliminé ! Pas d'inquiétude, les plantes vont bien !");
+                                Console.WriteLine("\nGrenade réussie ! L'Indominus a eu peur ! Pas d'inquiétude, les plantes vont bien !");
                                 Console.ResetColor();
                                 Thread.Sleep(2000);
                                 return;
