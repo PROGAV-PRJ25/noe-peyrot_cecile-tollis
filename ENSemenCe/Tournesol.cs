@@ -43,52 +43,58 @@ public class Tournesol : Plante
         switch (StadeCroissance)
         {
             case 1:
-                Console.WriteLine("  |  ");
+                Console.WriteLine(@"           _   _ ");
                 break;
             case 2:
-                Console.WriteLine("  |  ");
-                Console.WriteLine("  |  ");
+                Console.WriteLine(@"           _   _ ");
+                Console.WriteLine(@"       .-(  '.'  )-. ");
                 break;
             case 3:
-                Console.WriteLine("  |  ");
-                Console.WriteLine(" \\|/ ");
+                Console.WriteLine(@"           _   _ ");
+                Console.WriteLine(@"       .-(  '.'  )-. ");
+                Console.WriteLine(@"      (   \  : /   ) ");
                 break;
             case 4:
-                Console.WriteLine("  |  ");
-                Console.WriteLine(" \\|/ ");
-                Console.WriteLine("  |  ");
+                Console.WriteLine(@"           _   _ ");
+                Console.WriteLine(@"       .-(  '.'  )-. ");
+                Console.WriteLine(@"      (   \  :  /   ) ");
+                Console.WriteLine(@"    (   ` '-.;;;.-' ` ) ");
                 break;
             case 5:
-                Console.WriteLine("  |  ");
-                Console.WriteLine(" \\|/ ");
-                Console.WriteLine("  |  ");
-                Console.WriteLine(" / \\ ");
+                Console.WriteLine(@"           _   _ ");
+                Console.WriteLine(@"       .-(  '.'  )-. ");
+                Console.WriteLine(@"      (   \  : /   ) ");
+                Console.WriteLine(@"    (   ` '-.;;;.-' ` ) ");
+                Console.WriteLine(@"   (   : -==;;;;;==- : ) ");
                 break;
             case 6:
-                Console.WriteLine("  |  ");
-                Console.WriteLine(" \\|/ ");
-                Console.WriteLine("  |  ");
-                Console.WriteLine(" / \\ ");
-                Console.WriteLine("  |  ");
+                Console.WriteLine(@"           _   _ ");
+                Console.WriteLine(@"       .-(  '.'  )-. ");
+                Console.WriteLine(@"      (   \  : /   ) ");
+                Console.WriteLine(@"   (    ` '-.;;;.-' ` ) ");
+                Console.WriteLine(@" (  : -==;;;;;==- :    ) ");
+                Console.WriteLine(@"  (      .-';;;'-.    ) ");
                 break;
             case 7:
-                Console.WriteLine("  |  ");
-                Console.WriteLine(" \\|/ ");
-                Console.WriteLine("  |  ");
-                Console.WriteLine(" / \\ ");
-                Console.WriteLine("  |  ");
-                Console.WriteLine("  |  ");
+                Console.WriteLine(@"           _   _ ");
+                Console.WriteLine(@"       .-(  '.'  )-. ");
+                Console.WriteLine(@"      (   \  : /   ) ");
+                Console.WriteLine(@"   (    ` '-.;;;.-' `  ) ");
+                Console.WriteLine(@" (  : -==;;;;;==- :     ) ");
+                Console.WriteLine(@"  (      .-';;;'-.     ) ");
+                Console.WriteLine(@"    (`     / : \    `) ");
                 break;
-            case 8: // Stade final
-                Console.WriteLine(" \\|/ ");
-                Console.WriteLine(" -O- ");
-                Console.WriteLine("  |  ");
-                Console.WriteLine(" / \\ ");
-                Console.WriteLine("  |  ");
-                Console.WriteLine("  |  ");
-                break;
-            default:
+            case 8:
+                Console.WriteLine(@"           _   _ ");
+                Console.WriteLine(@"       .-(  '.'  )-. ");
+                Console.WriteLine(@"      (   \  : /   ) ");
+                Console.WriteLine(@"   (    ` '-.;;;.-'   ) ");
+                Console.WriteLine(@" (  : -==;;;;;==- :    ) ");
+                Console.WriteLine(@"  (      .-';;;'-.    ) ");
+                Console.WriteLine(@"    (`     / : \    `) ");
+                Console.WriteLine(@"        '-(_.'._)-'");
                 break;
         }
+
     }
 }
