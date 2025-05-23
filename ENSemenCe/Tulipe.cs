@@ -194,6 +194,5 @@ public class Tulipe : Plante
                 Console.WriteLine(@"     ^^^^^^^^");
                 break;
         }
-
     }
 }
