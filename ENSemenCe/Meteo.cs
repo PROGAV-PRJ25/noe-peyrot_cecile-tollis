@@ -11,7 +11,7 @@ public class Meteo
         ListeMeteo = new List<string> { "Petite pluie", "Soleil", "Nuageux" };
         ListeMeteoDangereuse = new List<string> { "Grosse pluie", "Sécheresse", "Tornade" };
         MeteoExceptionnelle = "Petit vent";
-        MeteoActuelle = "Soleil"; // On commence le jeu doucement.
+        MeteoActuelle = "Soleil"; // La météo commence en douceur.
         Changement = new Random();
     }
 
@@ -93,6 +93,7 @@ public class Meteo
                 break;
 
             case "Tornade":
+                Console.WriteLine("Une tornade secoue le jardin !");
                 foreach (var plante in joueur.PlantesSurJardin)
                 {
                     plante.VitesseDeCroissance = 0.5; // perturbation
@@ -102,6 +103,7 @@ public class Meteo
 
 
             case "Petit vent":
+                Console.WriteLine("Un petit vent souffle, attention aux plantes qui pourraient bouger...");
                 // Échange des plantes, pas d’effet direct sur la croissance
                 foreach (var plante in joueur.PlantesSurJardin)
                 {
@@ -231,7 +233,5 @@ public class Meteo
             Console.WriteLine("Aucune plante n’a été arrachée cette fois !");
         }
         Console.ForegroundColor = ConsoleColor.White;
-
     }
 }
-
