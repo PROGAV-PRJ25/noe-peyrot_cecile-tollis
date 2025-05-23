@@ -7,7 +7,7 @@ public class Rat : Intrus
     
     public override void Agir(Plateau plateau, Joueur joueur) 
     {
-        Console.WriteLine("Un rat est apparu ! Appuyez sur ESPACE pour faire du bruit !!");
+        Console.WriteLine("Un rat est apparu ! Appuie sur [ESPACE] pour faire du bruit !!");
         Console.ResetColor();
         Thread.Sleep(1500);
 
@@ -34,7 +34,7 @@ public class Rat : Intrus
 
         if (terrain == null)
         {
-            Console.WriteLine("\nLe rat n’a trouvé aucune plante sur tous les terrains !");
+            Console.WriteLine("\nLe rat n’a trouvé aucune plante sur aucun terrain !");
             Thread.Sleep(1500);
             return;
         }
@@ -60,7 +60,7 @@ public class Rat : Intrus
         {
             Console.Clear();
             Console.BackgroundColor=ConsoleColor.Red;
-            Console.WriteLine("Appuyez sur [ESPACE] pour chasser le rat !");
+            Console.WriteLine("Appuie sur [ESPACE] pour chasser le rat !");
 
             for (int i = 0; i < terrain.Cases.GetLength(0); i++)
             {
@@ -98,7 +98,7 @@ public class Rat : Intrus
                     if (key.Key == ConsoleKey.Spacebar)
                     {
                         Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.WriteLine("\nVous avez effrayé le rat ! Il s’enfuit !");
+                        Console.WriteLine("\nTu as effrayé le rat ! Il s’enfuit !");
                         Console.ResetColor();
                         Thread.Sleep(1500);
                         return;
@@ -110,7 +110,7 @@ public class Rat : Intrus
             if (terrain.Cases[ligneChoisie, col] is Plante plante)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"\n🐭 Le rat a mangé une {plante.Nom} !");
+                Console.WriteLine($"\n🐭 Le rat a mangé un(e) {plante.Nom} !");
                 Console.ResetColor();
                 terrain.Cases[ligneChoisie, col] = null;
                 joueur.PlantesSurJardin.Remove(plante);
