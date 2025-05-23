@@ -63,64 +63,64 @@ public class Ble : Plante
                 break;
             case 7:
                 Console.WriteLine("\\|/  \\|/");
-                Console.WriteLine(" |    |");
-                Console.WriteLine(" |    |");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  |     |");
                 break;
             case 8:
                 Console.WriteLine("\\|/  \\|/");
-                Console.WriteLine(" |    |");
-                Console.WriteLine(" |    |");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  |     |");
                 break;
             case 9:
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
-                Console.WriteLine(" |    |");
-                Console.WriteLine(" |    |");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  |     |");
                 break;
             case 10:
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
-                Console.WriteLine(" |    |");
-                Console.WriteLine(" |    |");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  |     |");
                 break;
             case 11:
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
-                Console.WriteLine(" |    |");
-                Console.WriteLine(" |    |");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  |     |");
                 break;
             case 12:
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
-                Console.WriteLine(" |    |");
-                Console.WriteLine(" |    |");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  |     |");
                 break;
             case 13:
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
-                Console.WriteLine(" |    |");
-                Console.WriteLine(" |    |");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  |     |");
                 break;
             case 14:
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
-                Console.WriteLine(" |    |");
-                Console.WriteLine(" |    |");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  |     |");
                 break;
             case 15:
-                Console.WriteLine(" |    | ");
+                Console.WriteLine("  |     | ");
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
-                Console.WriteLine(" |    |");
-                Console.WriteLine(" |    |");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  |     |");
                 break;
             case 16:
                 Console.WriteLine(" |    | ");
@@ -128,8 +128,8 @@ public class Ble : Plante
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
-                Console.WriteLine(" |    |");
-                Console.WriteLine(" |    |");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  |     |");
                 break;
             case 17:
                 Console.WriteLine("\\|/  \\|/");
@@ -137,8 +137,8 @@ public class Ble : Plante
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
-                Console.WriteLine(" |    |");
-                Console.WriteLine(" |    |");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  |     |");
                 break;
             case 18:
                 Console.WriteLine("\\|/  \\|/");
@@ -146,8 +146,8 @@ public class Ble : Plante
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
-                Console.WriteLine(" |    |");
-                Console.WriteLine(" |    |");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  |     |");
                 break;
             case 19:
                 Console.WriteLine("\\|/  \\|/");
@@ -155,18 +155,18 @@ public class Ble : Plante
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
-                Console.WriteLine(" |    |");
-                Console.WriteLine(" |    |");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  |     |");
                 break;
             case 20:
-                Console.WriteLine(" _    _");
+                Console.WriteLine("  _     _");
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
                 Console.WriteLine("\\|/  \\|/");
-                Console.WriteLine(" |    |");
-                Console.WriteLine(" |    |");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  |     |");
                 break;
             default:
                 break;
