@@ -122,6 +122,7 @@ public class Simulation
                 Console.WriteLine("2. Arroser");
                 Console.WriteLine("3. Récolter");
                 Console.WriteLine("4. Voir mes récoltes");
+                Console.WriteLine("5. Désherber un terrain");
                 Console.WriteLine("0. Passer à la semaine suivante");
                 choix = Convert.ToInt32(Console.ReadLine()!);
 
@@ -189,9 +190,15 @@ public class Simulation
                     {
                         joueur1!.AfficherInventaireRecoltes();
                     }
+                    else if (choix == 5)
+                    {
+                        joueur1.Desherber(plateau);
+                        plateau.AfficherPlateau();
+                    }
+
                 }
             }
-            foreach (var plante in joueur1.PlantesSurJardin.ToList())
+            foreach (var plante in joueur1.PlantesSurJardin.ToList()) // Mise à jour en fin de semaine des conditions de chaques plantes 
             {
                 plante.NiveauEau = plante.NiveauEau - 10;
                 plante.VerifierConditions(plante, joueur1);
@@ -200,12 +207,25 @@ public class Simulation
             }
             Console.Clear();
             semaineActuelle++;
-        }
+            plateau.FairePousserMauvaisesHerbes();
+            /*
+            if (semaineActuelle % 2 == 0) // Les mauvaises herbes poussent une semaine sur 2
+            {
+                plateau.FairePousserMauvaisesHerbes();
+            }
+            */
+            
 
+
+        }
+        Console.Clear();
         Console.WriteLine("C'est la fin de la partie !");
+        Thread.Sleep(500);
+        Console.WriteLine("Voici l'inventaire de tes récoltes");
+        joueur1!.AfficherInventaireRecoltes();
         Thread.Sleep(1000);
         AfficherFin();
-        
+
     }
 
     public void AfficherEffet()
@@ -316,15 +336,15 @@ public class Simulation
     }
 
 
-    public bool TesterModeUrgence(Random r)
+    public bool TesterModeUrgence(Random r) // Pourcentage de chance qu'un rat ou qu'un indominus arrive
     {
         int probaUrgence = r.Next(0, 101);
-        if (probaUrgence < 90)
+        if (probaUrgence < 87)
         {
             modeUrgence = false;
             typeIntrus = "";
         }
-        else if (probaUrgence < 96)
+        else if (probaUrgence < 94)
         {
             modeUrgence = true;
             typeIntrus = "Rat";
@@ -336,5 +356,8 @@ public class Simulation
         }
         return modeUrgence;
     }
+    
+
+
 
 }
