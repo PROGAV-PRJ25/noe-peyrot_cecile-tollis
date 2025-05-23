@@ -5,7 +5,7 @@ public class Rat : Intrus
     {
     }
     
-    public override void Agir(Plateau plateau, Joueur joueur)
+    public override void Agir(Plateau plateau, Joueur joueur) 
     {
         Console.WriteLine("Un rat est apparu ! Appuyez sur ESPACE pour faire du bruit !!");
         Console.ResetColor();
@@ -98,7 +98,7 @@ public class Rat : Intrus
                     if (key.Key == ConsoleKey.Spacebar)
                     {
                         Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.WriteLine("\nLe joueur a effrayé le rat ! Il s’enfuit !");
+                        Console.WriteLine("\nVous avez effrayé le rat ! Il s’enfuit !");
                         Console.ResetColor();
                         Thread.Sleep(1500);
                         return;
