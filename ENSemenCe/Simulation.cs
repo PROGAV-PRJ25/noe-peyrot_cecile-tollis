@@ -206,14 +206,12 @@ public class Simulation
 
             }
             Console.Clear();
-            semaineActuelle++;
-            plateau.FairePousserMauvaisesHerbes();
-            /*
+            semaineActuelle++;            
             if (semaineActuelle % 2 == 0) // Les mauvaises herbes poussent une semaine sur 2
             {
                 plateau.FairePousserMauvaisesHerbes();
             }
-            */
+            
             
 
 
