@@ -71,7 +71,7 @@ public class Meteo
                 break;
 
             case "Grosse pluie":
-                Console.WriteLine("Attention à la grosse pluie ! Certaines plantes risquent la noyade...");
+                Console.WriteLine("Attention à la grosse pluie !...");
                 foreach (var plante in joueur.PlantesSurJardin)
                 {
                     plante.NiveauEau = Math.Min(plante.NiveauEau + 20, 100);
