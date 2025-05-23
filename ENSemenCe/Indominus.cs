@@ -35,7 +35,7 @@ public class Indominus : Intrus
 
         if (terrain == null)
         {
-            Console.WriteLine("\nL'indominus n’a trouvé aucune plante sur tous les terrains !");
+            Console.WriteLine("\nL'indominus n’a trouvé aucune plante sur aucun terrain !");
             Thread.Sleep(1500);
             return;
         }
