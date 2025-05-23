@@ -76,14 +76,23 @@ public abstract class Plante
             plante.EtatSante -= 1;
         }
 
-        if (nbConditionsRespectees <= 1) // Si moins de 50% des conditions de la plante sont respectées elle meurt
+        if (NiveauEau <= 0)
         {
             plante.EtatSante = 0;
         }
 
+        if (nbConditionsRespectees <= 1) // Si moins de 50% des conditions de la plante sont respectées elle meurt
+            {
+                plante.EtatSante = 0;
+            }
+
         if (plante.EtatSante <= 0)
         {
-            plante.EstVivante = false;
+            plante.EstVivante = false; 
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine($"Malheureusement {plante.Nom} n'était pas en bonne santé, elle n'a pas survécu.");
+            Thread.Sleep(2000);
+            Console.ForegroundColor = ConsoleColor.White;
             SupprimerPlante(plante, plante.TerrainActuel!, joueur);
         }
 
