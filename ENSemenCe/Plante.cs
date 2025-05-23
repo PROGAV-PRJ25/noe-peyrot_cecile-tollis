@@ -90,7 +90,7 @@ public abstract class Plante
         {
             plante.EstVivante = false; 
             Console.ForegroundColor = ConsoleColor.DarkBlue;
-            Console.WriteLine($"Malheureusement {plante.Nom} n'était pas en bonne santé, elle n'a pas survécu.");
+            Console.WriteLine($"Malheureusement la plante {plante.Nom} n'était pas en bonne santé, elle n'a pas survécu.");
             Thread.Sleep(2000);
             Console.ForegroundColor = ConsoleColor.White;
             SupprimerPlante(plante, plante.TerrainActuel!, joueur);
