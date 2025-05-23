@@ -57,13 +57,13 @@ public class Joueur
         }
 
         bool plantee = false;
-        for (int i=0; i<terrainCible?.Cases.GetLength(0); i++)
+        for (int i = 0; i < terrainCible?.Cases.GetLength(0); i++)
         {
-            for (int j=0; j<terrainCible.Cases.GetLength(1); j++)
+            for (int j = 0; j < terrainCible.Cases.GetLength(1); j++)
             {
-                if ((plantee==false) && (terrainCible.Cases[i,j]==null))
+                if (!plantee && terrainCible.Cases[i, j] == null && !terrainCible.MauvaisesHerbes[i, j])
                 {
-                    terrainCible.Cases[i,j] = plante;
+                    terrainCible.Cases[i, j] = plante;
                     plantee = true;
                 }
             }
@@ -81,6 +81,7 @@ public class Joueur
 
         else
         {
+            Console.Clear();
             Console.WriteLine($"La zone {typeTerrain} est pleine. Impossible de planter {plante.Nom}.");
         }
     }
@@ -167,13 +168,66 @@ public class Joueur
             }
         }
     }
+    
+    public void Desherber(Plateau plateau)
+    {
+        if (NbActionsPossibles == 0)
+        {
+            Console.WriteLine("Tu n'as plus d'actions pour ce tour !");
+            return;
+        }
+
+        Terrain? terrainCible = null;
+        bool terrainTrouve = false;
+
+        while (!terrainTrouve)
+        {
+            Console.WriteLine("Choisis un terrain à désherber : Terre, Sable ou Argile.");
+            string typeTerrain = Convert.ToString(Console.ReadLine()!.ToLower());
+
+            foreach (var terrain in plateau.Terrains)
+            {
+                if (terrain.TypeTerrain.ToLower() == typeTerrain)
+                {
+                    terrainCible = terrain;
+                    terrainTrouve = true;
+                    break;
+                }
+            }
+
+            if (!terrainTrouve)
+            {
+                Console.WriteLine("Le terrain tapé est inconnu. Réessaie !");
+            }
+        }
+
+        if (terrainCible != null)
+        {
+            int mauvaisesHerbesEnlevees = 0;
+            for (int i = 0; i < terrainCible.MauvaisesHerbes.GetLength(0); i++)
+            {
+                for (int j = 0; j < terrainCible.MauvaisesHerbes.GetLength(1); j++)
+                {
+                    if (terrainCible.MauvaisesHerbes[i, j])
+                    {
+                        terrainCible.MauvaisesHerbes[i, j] = false;
+                        mauvaisesHerbesEnlevees++;
+                    }
+                }
+            }
+
+            NbActionsPossibles--;
+            Console.WriteLine($"Toutes les mauvaises herbes ont été enlevées du terrain {terrainCible.TypeTerrain}.");
+        }
+    }
+
 
     public void AfficherInventaireRecoltes()
     {
         Console.WriteLine("Afficher l'inventaire ne diminue pas le nombre d'action");
         Console.WriteLine("\n Inventaire des récoltes :");
 
-        if (InventaireRecoltes.Count==0)
+        if (InventaireRecoltes.Count == 0)
         {
             Console.WriteLine("Tu n'as encore rien récolté !");
         }
