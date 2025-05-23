@@ -43,32 +43,32 @@ public class Champignon : Plante
         switch (StadeCroissance)
         {
             case 1:
-                Console.WriteLine("  ,-.");
+                Console.WriteLine("     ,-.");
                 break;
             case 2:
-                Console.WriteLine("  ,-.");
+                Console.WriteLine("     ,-.");
                 Console.WriteLine("   ,'   `.");
                 break;
             case 3:
-                Console.WriteLine("  ,-.");
+                Console.WriteLine("     ,-.");
                 Console.WriteLine("   ,'   `.");
                 Console.WriteLine(" ,'       `.");
                 break;
             case 4:
-                Console.WriteLine("  ,-.");
+                Console.WriteLine("     ,-.");
                 Console.WriteLine("   ,'   `.");
                 Console.WriteLine(" ,'       `.");
                 Console.WriteLine(",'           `.");
                 break;
             case 5:
-                Console.WriteLine("  ,-.");
+                Console.WriteLine("     ,-.");
                 Console.WriteLine("   ,'   `.");
                 Console.WriteLine(" ,'       `.");
                 Console.WriteLine(",'           `.");
                 Console.WriteLine(",'               `.");
                 break;
             case 6:
-                Console.WriteLine("  ,-.");
+                Console.WriteLine("     ,-.");
                 Console.WriteLine("   ,'   `.");
                 Console.WriteLine(" ,'       `.");
                 Console.WriteLine(",'           `.");
@@ -76,7 +76,7 @@ public class Champignon : Plante
                 Console.WriteLine("'___________________`");
                 break;
             case 7: // Stade final
-                Console.WriteLine("      ,-.");
+                Console.WriteLine("         ,-.");
                 Console.WriteLine("       ,'   `.");
                 Console.WriteLine("     ,'       `.");
                 Console.WriteLine("   ,'           `.");
