@@ -28,7 +28,7 @@ public class Pissenlit : Plante
 
     public override void AfficherPlante()
     {
-        if (StadeCroissance >= 7)
+        if (StadeCroissance >= 9)
         {
             Console.WriteLine("Le pissenlit est déjà au stade final !");
             EstMure = true;
@@ -47,45 +47,63 @@ public class Pissenlit : Plante
                 break;
             case 2:
                 Console.WriteLine("  .--.");
-                Console.WriteLine(".'_\\/_'.");
+                Console.WriteLine(@" .'_\/_'.");
 
                 break;
             case 3:
                 Console.WriteLine("  .--.");
-                Console.WriteLine(".'_\\/_'.");
-                Console.WriteLine("'. /\\ .'");
+                Console.WriteLine(@".'_\/_'.");
+                Console.WriteLine(@"'. /\ .'");
                 break;
             case 4:
                 Console.WriteLine("  .--.");
-                Console.WriteLine(".'_\\/_'.");
-                Console.WriteLine("'. /\\ .'");
-                Console.WriteLine("  \"||\"");
+                Console.WriteLine(@".'_\/_'.");
+                Console.WriteLine(@"'. /\ .'");
+                Console.WriteLine(@"  '||'");
                 break;
             case 5:
                 Console.WriteLine("  .--.");
-                Console.WriteLine(".'_\\/_'.");
-                Console.WriteLine("'. /\\ .'");
-                Console.WriteLine("  \"||\"");
-                Console.WriteLine("   || /\\");
+                Console.WriteLine(@".'_\/_'.");
+                Console.WriteLine(@"'. /\ .'");
+                Console.WriteLine(@"  '||'");
+                Console.WriteLine(@"   || /\");
                 break;
             case 6:
                 Console.WriteLine("  .--.");
-                Console.WriteLine(".'_\\/_'.");
-                Console.WriteLine("'. /\\ .'");
-                Console.WriteLine("  \"||\"");
-                Console.WriteLine("   || /\\");
-                Console.WriteLine(" /\\ ||//\\)");
+                Console.WriteLine(@".'_\/_'.");
+                Console.WriteLine(@"'. /\ .'");
+                Console.WriteLine(@"  '||'");
+                Console.WriteLine(@"   || /\");
+                Console.WriteLine(@"/\ ||//\\)");
                 break;
-            case 7: // Stade final
-                Console.WriteLine("  .--.");
-                Console.WriteLine(".'_\\/_'.");
-                Console.WriteLine("'. /\\ .'");
-                Console.WriteLine("  \"||\"");
-                Console.WriteLine("   || /\\");
-                Console.WriteLine(" /\\ ||//\\)");
-                Console.WriteLine("(/\\\\||/");
-                Console.WriteLine("    \\||/");
-                Console.WriteLine("Pissenlit mature !");
+            case 7: 
+                Console.WriteLine("   .--.");
+                Console.WriteLine(@" .'_\/_'.");
+                Console.WriteLine(@" '. /\ .'");
+                Console.WriteLine(@"   '||'");
+                Console.WriteLine(@"    || /\");
+                Console.WriteLine(@" /\ ||//\\)");
+                Console.WriteLine(@"(/\\||/");
+                break;
+            case 8:
+                Console.WriteLine("   .--.");
+                Console.WriteLine(@" .'_\/_'.");
+                Console.WriteLine(@" '. /\ .'");
+                Console.WriteLine(@"   '||'");
+                Console.WriteLine(@"    || /\");
+                Console.WriteLine(@" /\ ||//\\)");
+                Console.WriteLine(@"(/\\||/");
+                Console.WriteLine("  \\||/");
+                break;
+            case 9:
+                Console.WriteLine("      .--.");
+                Console.WriteLine(@"    .'_\/_'.");
+                Console.WriteLine(@"    '. /\ .'");
+                Console.WriteLine(@"      '||'");
+                Console.WriteLine(@"       || /\");
+                Console.WriteLine(@"    /\ ||//\\)");
+                Console.WriteLine(@"   (/\\||/");
+                Console.WriteLine(@"______\||/_______");
                 break;
             default:
                 break;
