@@ -6,7 +6,6 @@ public abstract class Plante
     public int EtatSante {get;set;}
     public bool EstVivante {get;set;}
     public bool EstMure {get;set;}
-    public bool EstMalade {get;set;}
     public int StadeCroissance { get; set; } = 0; // Commence au stade 0
     public double VitesseDeCroissance { get; set; } = 1.0;
     public double ProgressionCroissance { get; set; } = 0.0;
@@ -21,7 +20,6 @@ public abstract class Plante
         EtatSante = 10; // la plante est en parfaite santé au tout début.
         EstVivante = true;
         EstMure = false;
-        EstMalade = false;
     }
 
     public void AfficherDonnees(Plante plante, Joueur joueur)
