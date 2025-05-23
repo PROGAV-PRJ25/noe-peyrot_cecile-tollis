@@ -9,6 +9,6 @@ public abstract class Intrus
         Symbole = symbole;
     }
     
-    public abstract void Agir(Plateau plateau, Joueur joueur); // Les intrus arrivent à se passer entre les mauvaises herbes 
+    public abstract void Agir(Plateau plateau, Joueur joueur); // Les intrus arrivent à passer entre les mauvaises herbes 
 
 }
