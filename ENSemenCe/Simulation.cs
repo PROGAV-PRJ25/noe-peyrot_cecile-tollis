@@ -334,7 +334,7 @@ public class Simulation
     }
 
 
-    public bool TesterModeUrgence(Random r) // Pourcentage de chance qu'un rat ou qu'un indominus arrive
+    public bool TesterModeUrgence(Random r) // Pourcentage de chance qu'un rat ou qu'un Indominus arrive
     {
         int probaUrgence = r.Next(0, 101);
         if (probaUrgence < 87)
