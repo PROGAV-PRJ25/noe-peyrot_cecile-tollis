@@ -20,6 +20,8 @@ public class Simulation
     private bool modeUrgence = false; // Ce booléen détermine si le mode urgence se lance ou non (il est donc initialisé à false pour un début normal).
     private string typeIntrus = ""; // Pour savoir quel intrus est apparu : "Rat" ou "Indominus"
     private Intrus? intrusActuel = null; // L'intrus actif sur le plateau (Rat ou Indominus)
+    private Rat rat;
+    private Indominus indominus;
 
     public Simulation(int nbTours)
     {
@@ -38,6 +40,8 @@ public class Simulation
         pissenlit1 = new Pissenlit("Pissenlit", "P"); // On crée un pissenlit.
         tulipe1 = new Tulipe("Tulipe", "Tu"); // On crée une tulipe.
         sapin1 = new Sapin("Sapin", "S"); // On crée un sapin.
+        rat = new Rat("Rat", "R");
+        indominus = new Indominus("Indominus", "I");
 
         webcam = new Webcam();
         meteo = new Meteo();
@@ -45,6 +49,7 @@ public class Simulation
 
     public void LancerSimulation()
     {
+        Console.BackgroundColor = ConsoleColor.Black;
         Console.Clear();
         AfficherEffet();
 
@@ -67,132 +72,129 @@ public class Simulation
             Random r = new Random();
             TesterModeUrgence(r);
 
-            if (TesterApparitionRat())
+            if (joueur1.PlantesSurJardin.Count != 0)
             {
-                Rat rat = new Rat("Rat", "R");
-                rat.Agir(plateau, joueur1!);
+                if (TesterModeUrgence(r) == true)
+                {
+                    ActiverModeUrgence();
+                    Console.WriteLine("Seulement une heure vient de s'écouler depuis l'incident !");
+                }
             }
 
-            if (TesterModeUrgence(r) == true)
+            
+           
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine($"Semaine {semaineActuelle}"); // On annonce le numéro de la semaine.
+            Console.ForegroundColor = ConsoleColor.White;
+
+            foreach (var plante in joueur1.PlantesSurJardin) // On affiche toutes les plantes déjà plantées pour suivre leur évolution.
             {
-                ActiverModeUrgence();
+                plante.AfficherDonnees(plante, joueur1);
+                Console.WriteLine();
+                plante.AfficherPlante();
+                Console.WriteLine("Appuie sur une touche pour continuer");
+                Console.ReadKey();
+                Console.WriteLine();
             }
 
-            else // Si le mode urgence n'est pas activé, la partie se déroule classiquement.
+            Console.Write("La météo de la semaine est : ");
+            Console.WriteLine(meteo.ChangerMeteo()); // On annonce la météo de la semaine.
+            meteo.AppliquerMeteo(joueur1, plateau); // On applique les effets de la météo.
+            joueur1!.NbActionsPossibles = 3; // On initialise le nombre d'actions possibles par tour pour le joueur, ici 3.
+
+            webcam.AfficherPlateau(plateau);
+
+
+            int choix = 10; // On l'a défini au hasard et différent de 0.
+            while (choix != 0 && joueur1.NbActionsPossibles != 0)
             {
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                Console.WriteLine($"Semaine {semaineActuelle}"); // On annonce le numéro de la semaine.
+                Console.WriteLine($"\nSemaine {semaineActuelle}"); // On annonce le numéro de la semaine.
                 Console.ForegroundColor = ConsoleColor.White;
 
-                foreach (var plante in joueur1.PlantesSurJardin) // On affiche toutes les plantes déjà plantées pour suivre leur évolution.
+                Console.WriteLine($"{joueur1!.Nom}, il te reste {joueur1.NbActionsPossibles} actions maximum !"); // On rappelle le nombre d'actions. 
+                Console.WriteLine("Choisis l'action que tu souhaites effectuer :");
+                Console.WriteLine("1. Semer ");
+                Console.WriteLine("2. Arroser");
+                Console.WriteLine("3. Récolter");
+                Console.WriteLine("4. Voir mes récoltes");
+                Console.WriteLine("0. Passer à la semaine suivante");
+                choix = Convert.ToInt32(Console.ReadLine()!);
+
+                Console.Clear();
+                if (choix != 0)
                 {
-                    plante.AfficherDonnees(plante, joueur1);
-                    Console.WriteLine();
-                    plante.AfficherPlante();
-                    Console.WriteLine("Appuie sur une touche pour continuer");
-                    Console.ReadKey();
-                    Console.WriteLine();
-                }
-
-                Console.Write("La météo de la semaine est : ");
-                Console.WriteLine(meteo.ChangerMeteo()); // On annonce la météo de la semaine.
-                meteo.AppliquerMeteo(joueur1, plateau); // On applique les effets de la météo.
-                joueur1!.NbActionsPossibles = 3; // On initialise le nombre d'actions possibles par tour pour le joueur, ici 3.
-
-                webcam.AfficherPlateau(plateau);
-
-
-                int choix = 10; // On l'a défini au hasard et différent de 0.
-                while (choix != 0 && joueur1.NbActionsPossibles != 0)
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.WriteLine($"\n Semaine {semaineActuelle}"); // On annonce le numéro de la semaine.
-                    Console.ForegroundColor = ConsoleColor.White;
-
-                    Console.WriteLine($"{joueur1!.Nom}, il te reste {joueur1.NbActionsPossibles} actions maximum !"); // On rappelle le nombre d'actions. 
-                    Console.WriteLine("Choisis l'action que tu souhaites effectuer :");
-                    Console.WriteLine("1. Semer ");
-                    Console.WriteLine("2. Arroser");
-                    Console.WriteLine("3. Récolter");
-                    Console.WriteLine("4. Voir mes récoltes");
-                    Console.WriteLine("0. Passer à la semaine suivante");
-                    choix = Convert.ToInt32(Console.ReadLine()!);
-
-                    Console.Clear();
-                    if (choix != 0)
+                    if (choix == 1)
                     {
-                        if (choix == 1)
+                        if (joueur1.InventaireSemis.Count != 0)
                         {
-                            if (joueur1.InventaireSemis.Count != 0)
+                            bool bonnePlante = false;
+                            int numPlante = 0; // On déclare numPlante à l'extérieur de la boucle pour pouvoir l'utiliser en-dehors.
+                            while (!bonnePlante)
                             {
-                                bool bonnePlante = false;
-                                int numPlante = 0; // On déclare numPlante à l'extérieur de la boucle pour pouvoir l'utiliser en-dehors.
-                                while (!bonnePlante)
+                                Console.WriteLine("Quelle plante veux-tu semer ?");
+                                int index = 1;
+                                foreach (var plante in joueur1.InventaireSemis) // On affiche toutes les plantes dans l'inventaire.
                                 {
-                                    Console.WriteLine("Quelle plante veux-tu semer ?");
-                                    int index = 1;
-                                    foreach (var plante in joueur1.InventaireSemis) // On affiche toutes les plantes dans l'inventaire.
-                                    {
-                                        Console.WriteLine($"{index}. {plante.Nom}");
-                                        index++;
-                                    }
-                                    Console.WriteLine("Entre le numéro de la plante : ");
-                                    numPlante = Convert.ToInt32(Console.ReadLine()!);
-
-                                    if (numPlante <= 0 || numPlante > joueur1.InventaireSemis.Count)
-                                    {
-                                        Console.Clear();
-                                        Console.ForegroundColor = ConsoleColor.Red;
-                                        Console.WriteLine("La plante choisie n'est pas dans la liste ! Tape le bon numéro !");
-                                        Console.ForegroundColor = ConsoleColor.White;
-                                    }
-                                    else
-                                    {
-                                        bonnePlante = true;
-                                    }
+                                    Console.WriteLine($"{index}. {plante.Nom}");
+                                    index++;
                                 }
+                                Console.WriteLine("Entre le numéro de la plante : ");
+                                numPlante = Convert.ToInt32(Console.ReadLine()!);
 
-                                var planteChoisie = joueur1.InventaireSemis[numPlante - 1];
-                                joueur1!.Semer(plateau, planteChoisie);
-                                plateau.AfficherPlateau();
+                                if (numPlante <= 0 || numPlante > joueur1.InventaireSemis.Count)
+                                {
+                                    Console.Clear();
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("La plante choisie n'est pas dans la liste ! Tape le bon numéro !");
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                }
+                                else
+                                {
+                                    bonnePlante = true;
+                                }
                             }
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("Tu ne peux plus semer de plantes, ton inventaire est vide !");
-                                Console.ForegroundColor = ConsoleColor.White;
-                            }
 
-                        }
-
-                        else if (choix == 2)
-                        {
-                            Console.WriteLine("Sur quel type de terrain veux-tu arroser ? (Terre, Sable, Argile)");
-                            string typeTerrain = Convert.ToString(Console.ReadLine()!.ToLower());
-                            joueur1!.Arroser(plateau, typeTerrain);
-                        }
-
-                        else if (choix == 3)
-                        {
-                            joueur1!.Recolter(plateau);
+                            var planteChoisie = joueur1.InventaireSemis[numPlante - 1];
+                            joueur1!.Semer(plateau, planteChoisie);
                             plateau.AfficherPlateau();
                         }
-
-                        else if (choix == 4)
+                        else
                         {
-                            joueur1!.AfficherInventaireRecoltes();
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Tu ne peux plus semer de plantes, ton inventaire est vide !");
+                            Console.ForegroundColor = ConsoleColor.White;
                         }
+
+                    }
+
+                    else if (choix == 2)
+                    {
+                        Console.WriteLine("Sur quel type de terrain veux-tu arroser ? (Terre, Sable, Argile)");
+                        string typeTerrain = Convert.ToString(Console.ReadLine()!.ToLower());
+                        joueur1!.Arroser(plateau, typeTerrain);
+                    }
+
+                    else if (choix == 3)
+                    {
+                        joueur1!.Recolter(plateau);
+                        plateau.AfficherPlateau();
+                    }
+
+                    else if (choix == 4)
+                    {
+                        joueur1!.AfficherInventaireRecoltes();
                     }
                 }
-                foreach (var plante in joueur1.PlantesSurJardin)
-                {
-                    plante.VerifierConditions(plante, joueur1);
-                    plante.Pousser(plante);
-                    plante.NiveauEau = plante.NiveauEau - 10;
-                }
-                Console.Clear();
-                semaineActuelle++;
             }
+            foreach (var plante in joueur1.PlantesSurJardin)
+            {
+                plante.VerifierConditions(plante, joueur1);
+                plante.Pousser(plante);
+                plante.NiveauEau = plante.NiveauEau - 10;
+            }
+            Console.Clear();
+            semaineActuelle++;
         }
 
     }
@@ -267,26 +269,28 @@ public class Simulation
 
     public void ActiverModeUrgence()
     {
+        Console.Clear();
         ConsoleColor originalBackground = Console.BackgroundColor;
         Console.BackgroundColor = ConsoleColor.Red;
 
-        Console.Clear();
+        Console.WriteLine($"🚨  MODE URGEEEENNCCEEEE  🚨");
         Console.WriteLine($"🚨  Attention, un intrus vient de s'introduire dans ton jardin !");
 
         if (typeIntrus == "Rat")
         {
             Console.WriteLine("🐭  Oh non, il s'agit d'un méchant rat !");
-            intrusActuel = new Rat("Rat", "R");
+            Thread.Sleep(1000);
+            rat.Agir(plateau, joueur1!);
+            intrusActuel = rat;
         }
         else
         {
             Console.WriteLine("🦖  Au secours, un terrible Indominus est là !!");
-            intrusActuel = new Indominus("Indominus", "I");
+            indominus.Agir(plateau, joueur1!);
+            intrusActuel = indominus;
         }
 
-        Console.WriteLine($"\nIntrus détecté : {intrusActuel.Symbole} - {intrusActuel.Nom}");
-
-        Thread.Sleep(3000);
+        Thread.Sleep(1000);
         Console.BackgroundColor = originalBackground;
         Console.Clear();
     }
@@ -295,12 +299,12 @@ public class Simulation
     public bool TesterModeUrgence(Random r)
     {
         int probaUrgence = r.Next(0, 101);
-        if (probaUrgence < 85)
+        if (probaUrgence < 90)
         {
             modeUrgence = false;
             typeIntrus = "";
         }
-        else if (probaUrgence < 95)
+        else if (probaUrgence < 96)
         {
             modeUrgence = true;
             typeIntrus = "Rat";
@@ -311,13 +315,6 @@ public class Simulation
             typeIntrus = "Indominus";
         }
         return modeUrgence;
-    }
-
-    public bool TesterApparitionRat()
-    {
-        Random r = new Random();
-        int chance = r.Next(0, 100);
-        return chance < 20;
     }
 
 }
